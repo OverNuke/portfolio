@@ -11,7 +11,12 @@ const NAME_LINES = [
 
 // #E4E4E4 = Silver Mist — 14.9:1 AAA on #0B0B0B
 // #6B84D4 = Abyss tint  — ~5.8:1 AA  on #0B0B0B
-const NAME_COLORS: [string, string] = ["#E4E4E4", "#6B84D4"];
+const NAME_COLORS: Record<string, string> = {
+  KEVIN: "#E4E4E4",
+  "SEBASTIÁN": "#E4E4E4",
+  "FRÍAS": "#6B84D4",
+  "GARCÍA": "#6B84D4",
+};
 
 export function Hero() {
   return (
@@ -34,7 +39,7 @@ export function Hero() {
       <div className="max-w-6xl mx-auto px-6 sm:px-8 py-16 w-full">
         <LayeredText
           lines={NAME_LINES}
-          colors={NAME_COLORS}
+          colorByWord={NAME_COLORS}
           className="mb-16"
         />
         <div className="h-15" />
