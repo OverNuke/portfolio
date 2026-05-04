@@ -42,7 +42,6 @@ export function Hero() {
           colorByWord={NAME_COLORS}
           className="mb-16"
         />
-        <div className="h-15" />
         {/* Role label with accent line */}
         <div className="flex items-center gap-3 mb-6" aria-hidden="true">
           <div className="w-8 h-px bg-foreground/20" />
