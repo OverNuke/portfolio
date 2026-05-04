@@ -77,7 +77,7 @@ export function LayeredText({
       className={`w-full py-24 font-sans font-black tracking-[-2px] uppercase antialiased cursor-pointer ${colors ? "" : "text-foreground"} ${className}`}
       style={{ fontSize, "--md-font-size": fontSizeMd } as React.CSSProperties}
     >
-      <ul className="list-none p-1 m-1 flex flex-col items-start">
+      <ul className="list-none p-1 m-1 flex flex-col items-center">
         {lines.map((line, index) => {
           const translateX = calculateTranslateX(index);
           return (
