@@ -1,33 +1,61 @@
-import { CTAButton } from '../ui/CTAButton'
-import DecryptedText from '@/components/DecryptedText'
+import { CTAButton } from "../ui/CTAButton";
+import { LayeredText } from "../ui/LayeredText";
+
+const NAME_LINES = [
+  { top: " ", bottom: "KEVIN" },
+  { top: "KEVIN", bottom: "SEBASTIÁN" },
+  { top: "SEBASTIÁN", bottom: "FRÍAS" },
+  { top: "FRÍAS", bottom: "GARCÍA" },
+  { top: "GARCÍA", bottom: " " },
+];
+
+// #E4E4E4 = Silver Mist — 14.9:1 AAA on #0B0B0B
+// #6B84D4 = Abyss tint  — ~5.8:1 AA  on #0B0B0B
+const NAME_COLORS: [string, string] = ["#E4E4E4", "#6B84D4"];
 
 export function Hero() {
   return (
-    <section className="min-h-screen flex items-center pt-16" aria-labelledby="hero-heading">
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 py-24">
-        <p className="font-mono text-xs text-muted uppercase tracking-widest mb-4">
-          // Hello, world
-        </p>
-        <h1
-          id="hero-heading"
-          className="text-6xl sm:text-8xl font-sans font-bold text-foreground leading-tight mb-8"
-        >
-          <DecryptedText text="Kevin" animateOn="view" sequential speed={130} />
-          <br />
-          <span className="bg-surface-raised text-foreground px-3 py-1 inline-block">
-            <DecryptedText text="Sebastián" animateOn="view" sequential speed={140} />
+    <section
+      className="min-h-screen flex flex-col justify-center pt-16 relative overflow-x-clip"
+      aria-labelledby="hero-heading"
+    >
+      {/* Section index marker */}
+      <span
+        className="absolute top-8 right-8 font-mono text-[10px] tracking-[0.5em] text-foreground/15 select-none uppercase"
+        aria-hidden="true"
+      >
+        001
+      </span>
+
+      {/* Visually hidden h1 preserves heading hierarchy for screen readers / SEO */}
+      <h1 id="hero-heading" className="sr-only">
+        Kevin Sebastián Frías García
+      </h1>
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 py-16 w-full">
+        <LayeredText
+          lines={NAME_LINES}
+          colors={NAME_COLORS}
+          className="mb-16"
+        />
+        <div className="h-15" />
+        {/* Role label with accent line */}
+        <div className="flex items-center gap-3 mb-6" aria-hidden="true">
+          <div className="w-8 h-px bg-foreground/20" />
+          <span className="font-mono text-[10px] tracking-[0.4em] text-foreground/30 uppercase">
+            Software Engineer
           </span>
-          <br />
-          <DecryptedText text="Frías García" animateOn="view" sequential speed={150} />
-        </h1>
-        <p className="text-muted text-lg max-w-xl leading-relaxed mb-10">
-          Software engineer building things for the web. Focused on clean architecture and expressive interfaces.
+        </div>
+        <p className="text-muted text-lg max-w-xl leading-relaxed mb-10 border-l border-foreground/10 pl-5">
+          Software engineer, like backend development but open to frontend and
+          mobile.
         </p>
         <div className="flex flex-wrap gap-4">
           <CTAButton href="#projects">View projects</CTAButton>
-          <CTAButton href="#contact" variant="outline">Get in touch</CTAButton>
+          <CTAButton href="#contact" variant="outline">
+            Get in touch
+          </CTAButton>
         </div>
       </div>
     </section>
-  )
+  );
 }

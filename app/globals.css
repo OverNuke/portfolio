@@ -7,7 +7,7 @@
 @theme {
   /* Typography */
   --font-sans: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, "Fira Code", monospace;
+  --font-mono: var(--font-google-sans-code), ui-monospace, "Fira Code", monospace;
 
   /* Colors — WCAG contrast ratios on --color-canvas (#0B0B0B)
    *

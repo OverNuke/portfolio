@@ -1,6 +1,7 @@
 import { PROJECTS } from '@/app/_lib/data'
 import { SectionHeading } from '../ui/SectionHeading'
 import { ProjectCard } from '../ui/ProjectCard'
+import { ProjectShowcase } from '../ui/ProjectShowcase'
 
 export function Projects() {
   return (
@@ -9,6 +10,7 @@ export function Projects() {
         <SectionHeading label="// 02" id="projects-heading">
           Projects
         </SectionHeading>
+        <ProjectShowcase />
         <ul
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
           role="list"

@@ -4,7 +4,6 @@ import { Contact } from './_components/sections/Contact'
 import { Hero } from './_components/sections/Hero'
 import { Projects } from './_components/sections/Projects'
 import { Skills } from './_components/sections/Skills'
-
 export default function Home() {
   return (
     <main id="main-content">

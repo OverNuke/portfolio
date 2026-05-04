@@ -5,6 +5,8 @@ export interface Project {
   href: string
   repo?: string
   featured?: boolean
+  image?: string
+  year?: string
 }
 
 export interface Certificate {

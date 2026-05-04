@@ -33,15 +33,15 @@ interface DotFieldProps {
 
 const DotField = memo(
   ({
-    dotRadius = 1.5,
+    dotRadius = 3.5,
     dotSpacing = 14,
-    cursorRadius = 500,
+    cursorRadius = 300,
     cursorForce = 0.1,
-    bulgeOnly = true,
-    bulgeStrength = 67,
+    bulgeOnly = false,
+    bulgeStrength = 37,
     glowRadius = 160,
     sparkle = false,
-    waveAmplitude = 0,
+    waveAmplitude = 1,
     gradientFrom = "rgba(168, 85, 247, 0.35)",
     gradientTo = "rgba(180, 151, 207, 0.25)",
     glowColor = "#120F17",
@@ -59,7 +59,7 @@ const DotField = memo(
       speed: 0,
     });
     const rafRef = useRef<number | null>(null);
-    const sizeRef = useRef({ w: 0, h: 0, offsetX: 0, offsetY: 0 });
+    const sizeRef = useRef({ w: 0, h: 0 });
     const glowOpacity = useRef(0);
     const engagement = useRef(0);
     const propsRef = useRef<Record<string, unknown>>({});
@@ -103,12 +103,7 @@ const DotField = memo(
         canvas!.style.height = `${h}px`;
         ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-        sizeRef.current = {
-          w,
-          h,
-          offsetX: rect.left + window.scrollX,
-          offsetY: rect.top + window.scrollY,
-        };
+        sizeRef.current = { w, h };
 
         buildDots(w, h);
       }
@@ -143,9 +138,8 @@ const DotField = memo(
       }
 
       function onMouseMove(e: MouseEvent) {
-        const s = sizeRef.current;
-        mouseRef.current.x = e.pageX - s.offsetX;
-        mouseRef.current.y = e.pageY - s.offsetY;
+        mouseRef.current.x = e.clientX;
+        mouseRef.current.y = e.clientY;
       }
 
       function updateMouseSpeed() {

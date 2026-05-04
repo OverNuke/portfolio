@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Syne, Geist } from "next/font/google";
+import { Google_Sans_Code, Syne, Geist } from "next/font/google";
 import "./globals.css";
 import BubbleMenu from "./_components/ui/BubbleMenu";
 import { Footer } from "./_components/layout/Footer";
@@ -14,21 +14,21 @@ const syne = Syne({
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const googleSansCode = Google_Sans_Code({
   subsets: ["latin"],
-  variable: "--font-jetbrains",
+  variable: "--font-google-sans-code",
   display: "swap",
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {
-  title: "Kevin Sebastián Frías García — Developer Portfolio",
-  description:
-    "Personal portfolio of Kevin Sebastián Frías García, software engineer.",
+  title: "Keff Portfolio",
+  description: "Wow, I'm a software engineer. My portfolio.",
 };
 
 const logo = (
   <span className="font-mono text-sm font-medium text-foreground">
-    Ke<span className="text-muted">vin</span>
+    Live &<span className="text-muted"> learn</span>
   </span>
 );
 
@@ -43,7 +43,7 @@ export default function RootLayout({
       className={cn(
         "dark",
         syne.variable,
-        jetbrainsMono.variable,
+        googleSansCode.variable,
         "font-sans",
         geist.variable,
       )}
