@@ -1,4 +1,6 @@
-import { CTAButton } from "../ui/CTAButton";
+"use client";
+
+import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 import { LayeredText } from "../ui/LayeredText";
 
 const NAME_LINES = [
@@ -11,12 +13,7 @@ const NAME_LINES = [
 
 // #E4E4E4 = Silver Mist — 14.9:1 AAA on #0B0B0B
 // #6B84D4 = Abyss tint  — ~5.8:1 AA  on #0B0B0B
-const NAME_COLORS: Record<string, string> = {
-  KEVIN: "#E4E4E4",
-  "SEBASTIÁN": "#E4E4E4",
-  "FRÍAS": "#6B84D4",
-  "GARCÍA": "#6B84D4",
-};
+const NAME_LINE_COLORS = ["#E4E4E4", "#6B84D4"];
 
 export function Hero() {
   return (
@@ -39,7 +36,8 @@ export function Hero() {
       <div className="max-w-6xl mx-auto px-6 sm:px-8 py-16 w-full">
         <LayeredText
           lines={NAME_LINES}
-          colorByWord={NAME_COLORS}
+          lineColors={NAME_LINE_COLORS}
+          animate={false}
           className="mb-16"
         />
         {/* Role label with accent line */}
@@ -54,10 +52,10 @@ export function Hero() {
           mobile.
         </p>
         <div className="flex flex-wrap gap-4">
-          <CTAButton href="#projects">View projects</CTAButton>
-          <CTAButton href="#contact" variant="outline">
-            Get in touch
-          </CTAButton>
+          <LiquidMetalButton
+            label="View projects"
+            onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+          />
         </div>
       </div>
     </section>

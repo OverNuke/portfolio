@@ -18,6 +18,8 @@ interface LayeredTextProps {
   lineHeightMd?: number;
   staggerX?: number;
   staggerXMd?: number;
+  lineColors?: string[];
+  animate?: boolean;
   className?: string;
 }
 
@@ -40,12 +42,16 @@ export function LayeredText({
   lineHeightMd = 44,
   staggerX = 14,
   staggerXMd = 8,
+  lineColors,
+  animate = true,
   className = "",
 }: LayeredTextProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
+    if (!animate) return;
+
     const container = containerRef.current;
     if (!container) return;
 
@@ -68,7 +74,7 @@ export function LayeredText({
       ctx.revert();
       timelineRef.current = null;
     };
-  }, [lines, lineHeight, lineHeightMd]);
+  }, [animate, lines, lineHeight, lineHeightMd]);
 
   const handleMouseEnter = () => timelineRef.current?.play();
   const handleMouseLeave = () => timelineRef.current?.reverse();
@@ -83,19 +89,19 @@ export function LayeredText({
         return {
           line,
           transform: `translateX(${index * staggerX}px) ${skew}`,
-          topColor: colorByWord?.[line.top.trim()],
-          bottomColor: colorByWord?.[line.bottom.trim()],
+          topColor: colorByWord?.[line.top.trim()] ?? lineColors?.[index % lineColors.length],
+          bottomColor: colorByWord?.[line.bottom.trim()] ?? lineColors?.[index % lineColors.length],
         };
       }),
-    [lines, staggerX, colorByWord],
+    [lines, staggerX, colorByWord, lineColors],
   );
 
   return (
     <div
       ref={containerRef}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className={`w-fit font-sans font-black tracking-[-2px] uppercase antialiased cursor-pointer text-foreground ${className}`}
+      onMouseEnter={animate ? handleMouseEnter : undefined}
+      onMouseLeave={animate ? handleMouseLeave : undefined}
+      className={`w-fit font-sans font-black tracking-[-2px] uppercase antialiased${animate ? " cursor-pointer" : ""} text-foreground ${className}`}
       style={{ fontSize } as React.CSSProperties}
     >
       <ul className="list-none p-0 m-0 flex flex-col items-start">
