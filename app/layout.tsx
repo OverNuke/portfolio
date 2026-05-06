@@ -50,7 +50,7 @@ export default function RootLayout({
     >
       <body>
         <DotFieldBackground />
-        <BubbleMenu logo={logo} />
+        <BubbleMenu logo={logo} useMetalOverlay useMetalToggle />
         {children}
         <Footer />
       </body>
