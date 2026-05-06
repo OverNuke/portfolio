@@ -4,7 +4,7 @@ import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 import { LayeredText } from "../ui/LayeredText";
 
 const NAME_LINES = [
-  { top: " ", bottom: "KEVIN" },
+  { top: " ", bottom: "" },
   { top: "KEVIN", bottom: "SEBASTIÁN" },
   { top: "SEBASTIÁN", bottom: "FRÍAS" },
   { top: "FRÍAS", bottom: "GARCÍA" },
@@ -38,7 +38,7 @@ export function Hero() {
           lines={NAME_LINES}
           lineColors={NAME_LINE_COLORS}
           animate={false}
-          className="mb-16"
+          className="mb-48"
         />
         {/* Role label with accent line */}
         <div className="flex items-center gap-3 mb-6" aria-hidden="true">
