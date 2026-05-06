@@ -104,30 +104,22 @@ export function LayeredText({
       className={`w-fit font-sans font-black tracking-[-2px] uppercase antialiased${animate ? " cursor-pointer" : ""} text-foreground ${className}`}
       style={{ fontSize } as React.CSSProperties}
     >
-      <ul className="list-none p-0 m-0 flex flex-col items-start">
-        {rows.map(({ line, transform, topColor, bottomColor }, index) => (
-          <li
-            key={index}
-            className="overflow-hidden relative origin-left"
-            style={{ height: `${lineHeight}px`, transform }}
-          >
-            <p
-              className="m-0 pr-6 whitespace-nowrap"
-              style={{
-                height: `${lineHeight}px`,
-                lineHeight: `${lineHeight}px`,
-                color: topColor,
-              }}
-            >
-              {line.top}
-            </p>
-            <p
-              className="m-0 pr-6 whitespace-nowrap"
-              style={{
-                height: `${lineHeight}px`,
-                lineHeight: `${lineHeight}px`,
-                color: bottomColor,
-              }}
+      <ul className="list-none p-1 m-1 flex flex-col items-center">
+        {lines.map((line, index) => {
+          const translateX = calculateTranslateX(index);
+          return (
+            <li
+              key={index}
+              className="overflow-hidden relative"
+              style={
+                {
+                  height: `${lineHeight}px`,
+                  transform: `translateX(${translateX.desktop}px) skew(${index % 2 === 0 ? "60deg, -30deg" : "0deg, -30deg"}) scaleY(${index % 2 === 0 ? "0.66667" : "1.33333"})`,
+                  color: colors ? colors[index % 2] : undefined,
+                  "--md-height": `${lineHeightMd}px`,
+                  "--md-translateX": `${translateX.mobile}px`,
+                } as React.CSSProperties
+              }
             >
               {line.bottom}
             </p>
