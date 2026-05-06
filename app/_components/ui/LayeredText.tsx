@@ -1,81 +1,108 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { gsap } from "gsap";
 import type React from "react";
 
+interface LayeredTextLine {
+  top: string;
+  bottom: string;
+}
+
 interface LayeredTextProps {
-  lines?: Array<{ top: string; bottom: string }>;
-  colors?: [string, string];
+  lines?: LayeredTextLine[];
+  colorByWord?: Record<string, string>;
   fontSize?: string;
   fontSizeMd?: string;
   lineHeight?: number;
   lineHeightMd?: number;
+  staggerX?: number;
+  staggerXMd?: number;
+  lineColors?: string[];
+  animate?: boolean;
   className?: string;
 }
 
+const DEFAULT_LINES: LayeredTextLine[] = [
+  { top: " ", bottom: "INFINITE" },
+  { top: "INFINITE", bottom: "PROGRESS" },
+  { top: "PROGRESS", bottom: "INNOVATION" },
+  { top: "INNOVATION", bottom: "FUTURE" },
+  { top: "FUTURE", bottom: "DREAMS" },
+  { top: "DREAMS", bottom: "ACHIEVEMENT" },
+  { top: "ACHIEVEMENT", bottom: " " },
+];
+
 export function LayeredText({
-  lines = [
-    { top: " ", bottom: "INFINITE" },
-    { top: "INFINITE", bottom: "PROGRESS" },
-    { top: "PROGRESS", bottom: "INNOVATION" },
-    { top: "INNOVATION", bottom: "FUTURE" },
-    { top: "FUTURE", bottom: "DREAMS" },
-    { top: "DREAMS", bottom: "ACHIEVEMENT" },
-    { top: "ACHIEVEMENT", bottom: " " },
-  ],
-  colors,
+  lines = DEFAULT_LINES,
+  colorByWord,
   fontSize = "72px",
   fontSizeMd = "36px",
-  lineHeight = 60,
-  lineHeightMd = 35,
+  lineHeight = 88,
+  lineHeightMd = 44,
+  staggerX = 14,
+  staggerXMd = 8,
+  lineColors,
+  animate = true,
   className = "",
 }: LayeredTextProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
-  const calculateTranslateX = (index: number) => {
-    const baseOffset = 25;
-    const baseOffsetMd = 15;
-    return {
-      desktop: index * baseOffset,
-      mobile: index * baseOffsetMd,
-    };
-  };
-
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!animate) return;
 
     const container = containerRef.current;
-    const paragraphs = container.querySelectorAll("p");
+    if (!container) return;
 
-    timelineRef.current = gsap.timeline({ paused: true });
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    timelineRef.current.to(paragraphs, {
-      y: window.innerWidth >= 768 ? -60 : -35,
-      duration: 0.8,
-      ease: "power2.out",
-      stagger: 0.08,
-    });
+    const ctx = gsap.context(() => {
+      const isMd = window.matchMedia("(min-width: 768px)").matches;
+      const travel = isMd ? lineHeight : lineHeightMd;
 
-    const handleMouseEnter = () => timelineRef.current?.play();
-    const handleMouseLeave = () => timelineRef.current?.reverse();
-
-    container.addEventListener("mouseenter", handleMouseEnter);
-    container.addEventListener("mouseleave", handleMouseLeave);
+      timelineRef.current = gsap.timeline({ paused: true });
+      timelineRef.current.to("p", {
+        y: -travel,
+        duration: 0.8,
+        ease: "power2.out",
+        stagger: 0.06,
+      });
+    }, container);
 
     return () => {
-      container.removeEventListener("mouseenter", handleMouseEnter);
-      container.removeEventListener("mouseleave", handleMouseLeave);
-      timelineRef.current?.kill();
+      ctx.revert();
+      timelineRef.current = null;
     };
-  }, [lines]);
+  }, [animate, lines, lineHeight, lineHeightMd]);
+
+  const handleMouseEnter = () => timelineRef.current?.play();
+  const handleMouseLeave = () => timelineRef.current?.reverse();
+
+  const rows = useMemo(
+    () =>
+      lines.map((line, index) => {
+        const even = index % 2 === 0;
+        const skew = even
+          ? "skew(60deg, -30deg) scaleY(0.66667)"
+          : "skew(0deg, -30deg) scaleY(1.33333)";
+        return {
+          line,
+          transform: `translateX(${index * staggerX}px) ${skew}`,
+          topColor: colorByWord?.[line.top.trim()] ?? lineColors?.[index % lineColors.length],
+          bottomColor: colorByWord?.[line.bottom.trim()] ?? lineColors?.[index % lineColors.length],
+        };
+      }),
+    [lines, staggerX, colorByWord, lineColors],
+  );
 
   return (
     <div
       ref={containerRef}
-      className={`w-full py-24 font-sans font-black tracking-[-2px] uppercase antialiased cursor-pointer ${colors ? "" : "text-foreground"} ${className}`}
-      style={{ fontSize, "--md-font-size": fontSizeMd } as React.CSSProperties}
+      onMouseEnter={animate ? handleMouseEnter : undefined}
+      onMouseLeave={animate ? handleMouseLeave : undefined}
+      className={`w-fit font-sans font-black tracking-[-2px] uppercase antialiased${animate ? " cursor-pointer" : ""} text-foreground ${className}`}
+      style={{ fontSize } as React.CSSProperties}
     >
       <ul className="list-none p-1 m-1 flex flex-col items-center">
         {lines.map((line, index) => {
@@ -94,27 +121,10 @@ export function LayeredText({
                 } as React.CSSProperties
               }
             >
-              <p
-                className="leading-[55px] md:leading-[30px] px-[15px] align-top whitespace-nowrap m-0"
-                style={{
-                  height: `${lineHeight}px`,
-                  lineHeight: `${lineHeight - 5}px`,
-                }}
-              >
-                {line.top}
-              </p>
-              <p
-                className="leading-55px md:leading-30px px-15px align-top whitespace-nowrap m-0"
-                style={{
-                  height: `${lineHeight}px`,
-                  lineHeight: `${lineHeight - 5}px`,
-                }}
-              >
-                {line.bottom}
-              </p>
-            </li>
-          );
-        })}
+              {line.bottom}
+            </p>
+          </li>
+        ))}
       </ul>
     </div>
   );

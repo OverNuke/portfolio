@@ -1,29 +1,49 @@
-import Image from 'next/image'
-import { SOCIAL_LINKS } from '@/app/_lib/data'
+import Image from "next/image";
+import { Footer as FooterUI } from "@/components/ui/footer";
 
 export function Footer() {
   return (
-    <footer className="border-t border-edge py-8 mt-12">
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="font-mono text-xs text-muted">
-          © {new Date().getFullYear()} Kevin S. Frías García
-        </p>
-        <ul className="flex items-center gap-4 pt-2 sm:pt-0" role="list" aria-label="Social links">
-          {SOCIAL_LINKS.filter(l => l.icon).map(({ label, href, icon }) => (
-            <li key={label}>
-              <a
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="inline-flex h-10 w-10 items-center justify-center opacity-60 hover:opacity-100 transition-opacity"
-              >
-                <Image src={icon!} alt={label} width={20} height={20} />
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </footer>
-  )
+    <FooterUI
+      logo={
+        <Image src="/SonicRing.gif" alt="Sonic Ring" width={40} height={40} />
+      }
+      brandName="Kevin S. Frías García"
+      socialLinks={[
+        {
+          icon: (
+            <Image
+              src="/github-light.svg"
+              alt="GitHub"
+              width={20}
+              height={20}
+            />
+          ),
+          href: "https://github.com/OverNuke",
+          label: "GitHub",
+        },
+        {
+          icon: (
+            <Image src="/linkedin.svg" alt="LinkedIn" width={20} height={20} />
+          ),
+          href: "https://www.linkedin.com/in/keffwontwakeup/",
+          label: "LinkedIn",
+        },
+        {
+          icon: <Image src="/gmail.svg" alt="Email" width={20} height={20} />,
+          href: "mailto:ksfgarcia24@gmail.com",
+          label: "Email",
+        },
+      ]}
+      mainLinks={[
+        { href: "#about", label: "About" },
+        { href: "#projects", label: "Projects" },
+        { href: "#skills", label: "Skills" },
+        { href: "#contact", label: "Contact" },
+      ]}
+      legalLinks={[]}
+      copyright={{
+        text: `© ${new Date().getFullYear()} Kevin S. Frías García`,
+      }}
+    />
+  );
 }
