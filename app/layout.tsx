@@ -4,7 +4,7 @@ import "./globals.css";
 import BubbleMenu from "./_components/ui/BubbleMenu";
 import { Footer } from "./_components/layout/Footer";
 import { cn } from "@/lib/utils";
-import { DotFieldBackground } from "./_components/layout/DotField";
+import { DotFieldBackground } from "./_components/layout/DotFieldBackground";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -23,7 +23,7 @@ const googleSansCode = Google_Sans_Code({
 
 export const metadata: Metadata = {
   title: "Keff Portfolio",
-  description: "Wow, I'm a software engineer. My portfolio.",
+  description: "Wow, I'm a software engineer. My portfolio btw.",
 };
 
 const logo = (

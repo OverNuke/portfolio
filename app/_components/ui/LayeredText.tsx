@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 import type React from "react";
 
@@ -48,6 +48,7 @@ export function LayeredText({
 }: LayeredTextProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
+  const [extraBottom, setExtraBottom] = useState(0);
 
   useEffect(() => {
     if (!animate) return;
@@ -96,13 +97,36 @@ export function LayeredText({
     [lines, staggerX, colorByWord, lineColors],
   );
 
+  useLayoutEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    function measure() {
+      const listEl = container!.querySelector("ul");
+      if (!listEl) return;
+      const ulBottom = listEl.getBoundingClientRect().bottom;
+      let maxBottom = ulBottom;
+      listEl.querySelectorAll("li").forEach((li) => {
+        maxBottom = Math.max(maxBottom, li.getBoundingClientRect().bottom);
+      });
+      const overflow = Math.max(0, maxBottom - ulBottom);
+      setExtraBottom((prev) => (Math.abs(prev - overflow) > 1 ? overflow : prev));
+    }
+
+    measure();
+
+    const ro = new ResizeObserver(measure);
+    ro.observe(container);
+    return () => ro.disconnect();
+  }, [rows]);
+
   return (
     <div
       ref={containerRef}
       onMouseEnter={animate ? handleMouseEnter : undefined}
       onMouseLeave={animate ? handleMouseLeave : undefined}
       className={`w-fit font-sans font-black tracking-[-2px] uppercase antialiased${animate ? " cursor-pointer" : ""} text-foreground ${className}`}
-      style={{ fontSize } as React.CSSProperties}
+      style={{ fontSize, ...(extraBottom > 0 && { paddingBottom: `${extraBottom}px` }) } as React.CSSProperties}
     >
       <ul className="list-none p-1 m-1 flex flex-col items-center">
         {rows.map((row, index) => (

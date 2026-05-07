@@ -1,39 +1,45 @@
-import { SKILLS } from '@/app/_lib/data'
-import { SectionHeading } from '../ui/SectionHeading'
-import { SkillBadge } from '../ui/SkillBadge'
+"use client";
 
-const CATEGORY_ORDER: string[] = ['language', 'framework', 'tool', 'other']
+import LogoLoop from "../ui/LogoLoop";
+import { SectionHeading } from "../ui/SectionHeading";
+
+const TECH_LOGOS = [
+  { src: "/dev-icons/expressjs-light.svg", alt: "Express.js" },
+  { src: "/dev-icons/python.svg", alt: "Python" },
+  { src: "/dev-icons/flutter.svg", alt: "Flutter" },
+  { src: "/dev-icons/firebase.svg", alt: "Firebase" },
+  { src: "/dev-icons/docker.svg", alt: "Docker" },
+  { src: "/dev-icons/git.svg", alt: "Git" },
+  { src: "/dev-icons/postman.svg", alt: "Postman" },
+  { src: "/dev-icons/vscode.svg", alt: "VS Code" },
+  { src: "/dev-icons/mysql.svg", alt: "MySQL" },
+];
 
 export function Skills() {
-  const categories = CATEGORY_ORDER.filter((cat) =>
-    SKILLS.some((s) => s.category === cat)
-  )
-
   return (
     <section id="skills" className="py-24" aria-labelledby="skills-heading">
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
         <SectionHeading label="// 04" id="skills-heading">
           Skills
         </SectionHeading>
-        <div className="space-y-10">
-          {categories.map((cat) => (
-            <div key={cat}>
-              <h3 className="font-mono text-xs text-muted uppercase tracking-widest mb-4 capitalize">
-                {cat}
-              </h3>
-              <ul
-                className="flex flex-wrap gap-2"
-                role="list"
-                aria-label={`${cat} skills`}
-              >
-                {SKILLS.filter((s) => s.category === cat).map((skill) => (
-                  <SkillBadge key={skill.name} name={skill.name} />
-                ))}
-              </ul>
-            </div>
-          ))}
+        <br />
+        <div
+          className="flex items-center overflow-hidden mt-10"
+          style={{ height: "72px" }}
+        >
+          <LogoLoop
+            logos={TECH_LOGOS}
+            speed={30}
+            direction="right"
+            logoHeight={60}
+            gap={30}
+            hoverSpeed={0}
+            fadeOut
+            scaleOnHover
+            ariaLabel="Technology skills"
+          />
         </div>
       </div>
     </section>
-  )
+  );
 }

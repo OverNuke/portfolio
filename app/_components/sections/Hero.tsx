@@ -4,11 +4,10 @@ import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 import { LayeredText } from "../ui/LayeredText";
 
 const NAME_LINES = [
-  { top: " ", bottom: "" },
   { top: "KEVIN", bottom: "SEBASTIÁN" },
   { top: "SEBASTIÁN", bottom: "FRÍAS" },
   { top: "FRÍAS", bottom: "GARCÍA" },
-  { top: "GARCÍA", bottom: " " },
+  { top: "GARCÍA", bottom: "" },
 ];
 
 // #E4E4E4 = Silver Mist — 14.9:1 AAA on #0B0B0B
@@ -33,18 +32,18 @@ export function Hero() {
       <h1 id="hero-heading" className="sr-only">
         Kevin Sebastián Frías García
       </h1>
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 py-16 w-full">
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 pt-0 pb-16 w-full">
         <LayeredText
           lines={NAME_LINES}
           lineColors={NAME_LINE_COLORS}
           animate={false}
-          className="mb-48"
+          className="mb-8"
         />
         {/* Role label with accent line */}
         <div className="flex items-center gap-3 mb-6" aria-hidden="true">
-          <div className="w-8 h-px bg-foreground/20" />
-          <span className="font-mono text-[10px] tracking-[0.4em] text-foreground/30 uppercase">
-            Software Engineer
+          <div className="w-8 h-px bg-foreground/40" />
+          <span className="font-mono text-[10px] tracking-[0.4em] text-foreground/40 uppercase">
+            An alien amoung humans beings who codes
           </span>
         </div>
         <p className="text-muted text-lg max-w-xl leading-relaxed mb-10 border-l border-foreground/10 pl-5">
@@ -54,7 +53,12 @@ export function Hero() {
         <div className="flex flex-wrap gap-4">
           <LiquidMetalButton
             label="View projects"
-            onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() =>
+              document
+                .getElementById("projects")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+            viewMode="icon"
           />
         </div>
       </div>
