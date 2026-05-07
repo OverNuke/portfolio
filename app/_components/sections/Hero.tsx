@@ -60,6 +60,26 @@ export function Hero() {
             }
             viewMode="icon"
           />
+          {/* TODO: temporary ghost-variant preview — remove once approved */}
+          <LiquidMetalButton
+            label="Ghost demo"
+            onClick={() =>
+              document
+                .getElementById("projects")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+            variant="ghost"
+          />
+          <LiquidMetalButton
+            label="Ghost demo"
+            onClick={() =>
+              document
+                .getElementById("projects")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+            viewMode="icon"
+            variant="ghost"
+          />
         </div>
       </div>
     </section>
