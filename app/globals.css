@@ -6,8 +6,8 @@
 
 @theme {
   /* Typography */
-  --font-sans: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-google-sans-code), ui-monospace, "Fira Code", monospace;
+  --font-sans: var(--font-gc-prop), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-gc-mono), ui-monospace, monospace;
 
   /* Colors — WCAG contrast ratios on --color-canvas (#0B0B0B)
    *
@@ -47,6 +47,7 @@ body {
   min-height: 100dvh;
   color: var(--color-foreground);
   margin: 1rem;
+  font-weight: 300;
 }
 
 @theme inline {

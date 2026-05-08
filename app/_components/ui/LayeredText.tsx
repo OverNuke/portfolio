@@ -21,6 +21,7 @@ interface LayeredTextProps {
   lineColors?: string[];
   animate?: boolean;
   className?: string;
+  lineGap?: number;
 }
 
 const DEFAULT_LINES: LayeredTextLine[] = [
@@ -45,6 +46,7 @@ export function LayeredText({
   lineColors,
   animate = true,
   className = "",
+  lineGap = 0,
 }: LayeredTextProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
@@ -90,8 +92,12 @@ export function LayeredText({
         return {
           line,
           transform: `translateX(${index * staggerX}px) ${skew}`,
-          topColor: colorByWord?.[line.top.trim()] ?? lineColors?.[index % lineColors.length],
-          bottomColor: colorByWord?.[line.bottom.trim()] ?? lineColors?.[index % lineColors.length],
+          topColor:
+            colorByWord?.[line.top.trim()] ??
+            lineColors?.[index % lineColors.length],
+          bottomColor:
+            colorByWord?.[line.bottom.trim()] ??
+            lineColors?.[index % lineColors.length],
         };
       }),
     [lines, staggerX, colorByWord, lineColors],
@@ -110,7 +116,9 @@ export function LayeredText({
         maxBottom = Math.max(maxBottom, li.getBoundingClientRect().bottom);
       });
       const overflow = Math.max(0, maxBottom - ulBottom);
-      setExtraBottom((prev) => (Math.abs(prev - overflow) > 1 ? overflow : prev));
+      setExtraBottom((prev) =>
+        Math.abs(prev - overflow) > 0 ? overflow : prev,
+      );
     }
 
     measure();
@@ -126,22 +134,34 @@ export function LayeredText({
       onMouseEnter={animate ? handleMouseEnter : undefined}
       onMouseLeave={animate ? handleMouseLeave : undefined}
       className={`w-fit font-sans font-black tracking-[-2px] uppercase antialiased${animate ? " cursor-pointer" : ""} text-foreground ${className}`}
-      style={{ fontSize, ...(extraBottom > 0 && { paddingBottom: `${extraBottom}px` }) } as React.CSSProperties}
+      style={
+        {
+          fontSize,
+          fontWeight: 900,
+          ...(extraBottom > 0 && { paddingBottom: `${extraBottom}px` }),
+        } as React.CSSProperties
+      }
     >
-      <ul className="list-none p-1 m-1 flex flex-col items-center">
+      <ul
+        className="list-none p-1 m-1 flex flex-col items-center"
+        style={{ gap: lineGap > 0 ? `${lineGap}px` : undefined }}
+      >
         {rows.map((row, index) => (
           <li
             key={index}
-            className="overflow-hidden relative"
-            style={{
-              height: `${lineHeight}px`,
-              transform: row.transform,
-              color: row.topColor,
-              "--md-height": `${lineHeightMd}px`,
-            } as React.CSSProperties}
+            className="relative"
+            style={
+              {
+                height: `${lineHeight}px`,
+                transform: row.transform,
+                color: row.topColor,
+                "--md-height": `${lineHeightMd}px`,
+                clipPath: 'inset(0)',
+              } as React.CSSProperties
+            }
           >
-            <p>{row.line.top}</p>
-            <p>{row.line.bottom}</p>
+            <p style={{ lineHeight: `${lineHeight}px` }}>{row.line.top}</p>
+            <p style={{ lineHeight: `${lineHeight}px` }}>{row.line.bottom}</p>
           </li>
         ))}
       </ul>

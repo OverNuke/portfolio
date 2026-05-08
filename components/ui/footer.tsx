@@ -1,6 +1,6 @@
 import type React from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { LiquidMetalButton } from "./liquid-metal-button";
 
 interface FooterProps {
   logo: React.ReactNode;
@@ -47,20 +47,12 @@ export function Footer({
           <ul className="flex list-none mt-6 md:mt-0 gap-x-1">
             {socialLinks.map((link, i) => (
               <li key={i}>
-                <Button
-                  size="icon"
-                  className="h-10 w-10 rounded-full bg-surface-raised border border-edge hover:bg-accent/30 transition-colors"
-                  asChild
-                >
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={link.label}
-                  >
-                    {link.icon}
-                  </a>
-                </Button>
+                <LiquidMetalButton
+                  label={link.label}
+                  viewMode="icon"
+                  onClick={() => window.open(link.href, "_blank", "noopener")}
+                  icon={link.icon}
+                ></LiquidMetalButton>
               </li>
             ))}
           </ul>

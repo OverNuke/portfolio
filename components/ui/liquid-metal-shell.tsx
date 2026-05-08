@@ -58,6 +58,159 @@ export function LiquidMetalShell({
             opacity: 0;
           }
         }
+
+        /* ── Ghost variant: liquid-chrome animated treatment ─────────────── */
+        @property --ghost-rotate {
+          syntax: "<number>";
+          inherits: true;
+          initial-value: 0;
+        }
+        @property --ghost-bg-x {
+          syntax: "<number>";
+          inherits: true;
+          initial-value: 50;
+        }
+        @property --ghost-bg-y {
+          syntax: "<number>";
+          inherits: true;
+          initial-value: 50;
+        }
+        @property --ghost-hue-shift {
+          syntax: "<number>";
+          inherits: true;
+          initial-value: 0;
+        }
+        @property --ghost-glow-opacity {
+          syntax: "<number>";
+          inherits: true;
+          initial-value: 0.55;
+        }
+        @property --ghost-glow-blur {
+          syntax: "<number>";
+          inherits: true;
+          initial-value: 14;
+        }
+
+        .ghost-metal-stack {
+          --ghost-anim-speed: 7s;
+          --ghost-interaction-speed: 0.55s;
+          /* Palette borrowed from LiquidMetalBackground:
+             E4E4E4 silver mist, 6B84D4 abyss tint, 0B0B0B page base */
+          --ghost-silver: 228, 228, 228;
+          --ghost-abyss: 107, 132, 212;
+          --ghost-base: 11, 11, 11;
+          position: absolute;
+          inset: 0;
+          border-radius: 100px;
+          pointer-events: none;
+          overflow: visible;
+        }
+
+        .ghost-metal-fill {
+          position: absolute;
+          inset: 2px;
+          border-radius: 100px;
+          background:
+            radial-gradient(
+              140% 320% at calc(var(--ghost-bg-x) * 1%) calc(var(--ghost-bg-y) * 1%),
+              rgba(var(--ghost-silver), 0.55) 0%,
+              rgba(var(--ghost-abyss), 0.32) 22%,
+              rgba(40, 42, 50, 0.45) 55%,
+              rgba(var(--ghost-base), 0.7) 100%
+            ),
+            linear-gradient(180deg, rgba(20, 20, 24, 0.4) 0%, rgba(var(--ghost-base), 0.6) 100%);
+          backdrop-filter: blur(6px);
+          -webkit-backdrop-filter: blur(6px);
+          animation: ghost-rotate-bg var(--ghost-anim-speed) linear infinite,
+                     ghost-hue-drift calc(var(--ghost-anim-speed) * 2) ease-in-out infinite;
+          filter: hue-rotate(calc(var(--ghost-hue-shift) * 1deg));
+          overflow: hidden;
+        }
+
+        .ghost-metal-fill::before {
+          /* Conic chrome rim that scans around the pill */
+          content: "";
+          position: absolute;
+          inset: 0;
+          border-radius: 100px;
+          padding: 1px;
+          background: conic-gradient(
+            from calc(var(--ghost-rotate) * 1deg),
+            rgba(var(--ghost-silver), 0) 0deg,
+            rgba(var(--ghost-silver), 0.85) 35deg,
+            rgba(var(--ghost-abyss), 0.55) 80deg,
+            rgba(var(--ghost-silver), 0) 160deg,
+            rgba(var(--ghost-silver), 0) 360deg
+          );
+          -webkit-mask:
+            linear-gradient(#000 0 0) content-box,
+            linear-gradient(#000 0 0);
+          -webkit-mask-composite: xor;
+          mask:
+            linear-gradient(#000 0 0) content-box,
+            linear-gradient(#000 0 0);
+          mask-composite: exclude;
+          animation: ghost-rotate var(--ghost-anim-speed) linear infinite;
+          pointer-events: none;
+        }
+
+        .ghost-metal-glow {
+          position: absolute;
+          inset: -60% -25%;
+          border-radius: 999px;
+          background: radial-gradient(
+            55% 55% at 50% 50%,
+            rgba(var(--ghost-silver), 0.4) 0%,
+            rgba(var(--ghost-abyss), 0.22) 38%,
+            transparent 72%
+          );
+          filter: blur(calc(var(--ghost-glow-blur) * 1px));
+          opacity: var(--ghost-glow-opacity);
+          transform: rotate(calc(var(--ghost-rotate) * 1deg));
+          transform-origin: center;
+          animation: ghost-rotate var(--ghost-anim-speed) linear infinite;
+          z-index: -1;
+          pointer-events: none;
+        }
+
+        .ghost-metal-stack[data-hover="true"] .ghost-metal-fill {
+          animation-play-state: paused;
+        }
+        .ghost-metal-stack[data-hover="true"] .ghost-metal-fill::before {
+          animation-play-state: paused;
+        }
+        .ghost-metal-stack[data-hover="true"] .ghost-metal-glow {
+          animation-play-state: paused;
+          --ghost-glow-opacity: 0.85;
+          --ghost-glow-blur: 9;
+          transition:
+            --ghost-glow-opacity var(--ghost-interaction-speed) ease,
+            --ghost-glow-blur var(--ghost-interaction-speed) ease;
+        }
+
+        @keyframes ghost-rotate {
+          from { --ghost-rotate: 0; }
+          to   { --ghost-rotate: 360; }
+        }
+        @keyframes ghost-rotate-bg {
+          0%   { --ghost-bg-x: 15;  --ghost-bg-y: 30; }
+          25%  { --ghost-bg-x: 85;  --ghost-bg-y: 20; }
+          50%  { --ghost-bg-x: 90;  --ghost-bg-y: 75; }
+          75%  { --ghost-bg-x: 10;  --ghost-bg-y: 70; }
+          100% { --ghost-bg-x: 15;  --ghost-bg-y: 30; }
+        }
+        @keyframes ghost-hue-drift {
+          0%, 100% { --ghost-hue-shift: -8; }
+          50%      { --ghost-hue-shift: 8; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .ghost-metal-fill,
+          .ghost-metal-fill::before,
+          .ghost-metal-glow {
+            animation: none !important;
+          }
+        }
       `;
       document.head.appendChild(style);
     }
@@ -190,6 +343,16 @@ export function LiquidMetalShell({
                   "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease, box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
               }}
             />
+          )}
+          {variant === "ghost" && (
+            <div
+              className="ghost-metal-stack"
+              data-hover={isHovered ? "true" : "false"}
+              aria-hidden="true"
+            >
+              <span className="ghost-metal-glow" />
+              <div className="ghost-metal-fill" />
+            </div>
           )}
         </div>
 

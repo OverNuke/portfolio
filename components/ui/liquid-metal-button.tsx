@@ -9,7 +9,8 @@ interface LiquidMetalButtonProps {
   label?: string;
   onClick?: () => void;
   viewMode?: "text" | "icon";
-  variant?: "default" | "contrast" | "ghost";
+  variant?: "default" | "ghost";
+  icon?: React.ReactNode;
 }
 
 export function LiquidMetalButton({
@@ -17,6 +18,7 @@ export function LiquidMetalButton({
   onClick,
   viewMode = "text",
   variant = "default",
+  icon,
 }: LiquidMetalButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
@@ -32,7 +34,7 @@ export function LiquidMetalButton({
 
   // Text/icon color per variant
   const contentColor =
-    variant === "contrast"
+    variant === "default"
       ? "#0B0B0B"
       : variant === "ghost"
         ? "#E4E4E4"
@@ -102,16 +104,17 @@ export function LiquidMetalButton({
           }}
           aria-label={label}
         >
-          {viewMode === "icon" && (
-            <Sparkles
-              size={16}
-              style={{
-                color: contentColor,
-                filter: "drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.5))",
-                transition: "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
-              }}
-            />
-          )}
+          {viewMode === "icon" &&
+            (icon ?? (
+              <Sparkles
+                size={16}
+                style={{
+                  color: contentColor,
+                  filter: "drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.5))",
+                  transition: "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                }}
+              />
+            ))}
           {viewMode === "text" && (
             <span
               style={{
