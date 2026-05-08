@@ -1,13 +1,14 @@
 "use client";
 
+import Image from "next/image";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 import { LayeredText } from "../ui/LayeredText";
 
 const NAME_LINES = [
-  { top: "KEVIN", bottom: "SEBASTIÁN" },
-  { top: "SEBASTIÁN", bottom: "FRÍAS" },
-  { top: "FRÍAS", bottom: "GARCÍA" },
-  { top: "GARCÍA", bottom: "" },
+  { top: "Kevin", bottom: "García" },
+  { top: "Sebastián", bottom: "Frías" },
+  { top: "Frías", bottom: "Sebastián" },
+  { top: "García", bottom: "Kevin" },
 ];
 
 // #E4E4E4 = Silver Mist — 14.9:1 AAA on #0B0B0B
@@ -36,8 +37,10 @@ export function Hero() {
         <LayeredText
           lines={NAME_LINES}
           lineColors={NAME_LINE_COLORS}
-          animate={false}
+          animate={true}
+          lineGap={8}
           className="mb-8"
+          fontSize="66px"
         />
         {/* Role label with accent line */}
         <div className="flex items-center gap-3 mb-6" aria-hidden="true">
@@ -52,6 +55,24 @@ export function Hero() {
         </p>
         <div className="flex flex-wrap gap-4">
           <LiquidMetalButton
+            label="View about me"
+            onClick={() =>
+              document
+                .getElementById("about")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+            variant="ghost"
+            viewMode="icon"
+            icon={
+              <Image
+                src="/section-icons/account_circle.svg"
+                alt="Account circle icon"
+                width={20}
+                height={20}
+              />
+            }
+          />
+          <LiquidMetalButton
             label="View projects"
             onClick={() =>
               document
@@ -59,26 +80,49 @@ export function Hero() {
                 ?.scrollIntoView({ behavior: "smooth" })
             }
             viewMode="icon"
-          />
-          {/* TODO: temporary ghost-variant preview — remove once approved */}
-          <LiquidMetalButton
-            label="Ghost demo"
-            onClick={() =>
-              document
-                .getElementById("projects")
-                ?.scrollIntoView({ behavior: "smooth" })
+            icon={
+              <Image
+                src="/section-icons/folder_code.svg"
+                alt="Folder with code icon"
+                width={20}
+                height={20}
+              />
             }
-            variant="ghost"
           />
           <LiquidMetalButton
-            label="Ghost demo"
+            label="View certificates and skills"
             onClick={() =>
               document
-                .getElementById("projects")
+                .getElementById("certificates")
                 ?.scrollIntoView({ behavior: "smooth" })
             }
             viewMode="icon"
             variant="ghost"
+            icon={
+              <Image
+                src="/section-icons/history_edu.svg"
+                alt="History edu icon"
+                width={20}
+                height={20}
+              />
+            }
+          />
+          <LiquidMetalButton
+            label="Contact me"
+            onClick={() =>
+              document
+                .getElementById("contact")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+            viewMode="icon"
+            icon={
+              <Image
+                src="/section-icons/connect_without_contact.svg"
+                alt="Connect without contact icon"
+                width={20}
+                height={20}
+              />
+            }
           />
         </div>
       </div>

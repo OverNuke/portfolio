@@ -1,24 +1,23 @@
 import type { Metadata } from "next";
-import { Google_Sans_Code, Syne, Geist } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import BubbleMenu from "./_components/ui/BubbleMenu";
 import { Footer } from "./_components/layout/Footer";
 import { cn } from "@/lib/utils";
 import { DotFieldBackground } from "./_components/layout/DotFieldBackground";
+import IdleAnimation from "@/components/ui/idle-animation";
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
-
-const syne = Syne({
-  subsets: ["latin"],
-  variable: "--font-syne",
+const gcMono = localFont({
+  src: "../public/GoogleSansCode-VariableFont_MONO,wght.ttf",
+  variable: "--font-gc-mono",
+  weight: "100 900",
   display: "swap",
 });
 
-const googleSansCode = Google_Sans_Code({
-  subsets: ["latin"],
-  variable: "--font-google-sans-code",
+const gcProp = localFont({
+  src: "../public/GoogleSansCode_Proportional-Regular.ttf",
+  variable: "--font-gc-prop",
   display: "swap",
-  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {
@@ -42,10 +41,8 @@ export default function RootLayout({
       lang="en"
       className={cn(
         "dark",
-        syne.variable,
-        googleSansCode.variable,
-        "font-sans",
-        geist.variable,
+        gcMono.variable,
+        gcProp.variable,
       )}
     >
       <body>
@@ -53,6 +50,7 @@ export default function RootLayout({
         <BubbleMenu logo={logo} useMetalToggle />
         {children}
         <Footer />
+        <IdleAnimation />
       </body>
     </html>
   );
