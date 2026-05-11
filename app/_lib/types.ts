@@ -1,5 +1,6 @@
 export interface Project {
   title: string
+  subtitle?: string
   description: string
   tags: string[]
   href: string
@@ -9,11 +10,17 @@ export interface Project {
   year?: string
 }
 
+export type CertificateCategory = 'academic' | 'language' | 'honors'
+export type CertificateShape = 'hero' | 'circle' | 'pill' | 'strip' | 'portrait'
+
 export interface Certificate {
   title: string
   issuer: string
   date: string
   href?: string
+  category: CertificateCategory
+  shape: CertificateShape
+  ext?: 'PDF' | 'JPG' | 'PNG'
 }
 
 export interface Skill {

@@ -17,14 +17,13 @@ const TECH_LOGOS = [
 
 export function Skills() {
   return (
-    <section id="skills" className="py-24" aria-labelledby="skills-heading">
+    <section id="skills" className="py-32" aria-labelledby="skills-heading">
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
         <SectionHeading label="// 04" id="skills-heading">
           Skills
         </SectionHeading>
-        <br />
         <div
-          className="flex items-center overflow-hidden mt-10"
+          className="flex items-center overflow-hidden"
           style={{ height: "72px" }}
         >
           <LogoLoop

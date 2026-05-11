@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Playfair_Display } from "next/font/google";
 import "./globals.css";
 import BubbleMenu from "./_components/ui/BubbleMenu";
 import { Footer } from "./_components/layout/Footer";
@@ -17,6 +18,12 @@ const gcMono = localFont({
 const gcProp = localFont({
   src: "../public/GoogleSansCode_Proportional-Regular.ttf",
   variable: "--font-gc-prop",
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
   display: "swap",
 });
 
@@ -43,6 +50,7 @@ export default function RootLayout({
         "dark",
         gcMono.variable,
         gcProp.variable,
+        playfair.variable,
       )}
     >
       <body>
