@@ -1,11 +1,14 @@
 import type { Project } from '@/app/_lib/types'
 
-export function ProjectCard({ title, description, tags, href, repo }: Project) {
+export function ProjectCard({ title, subtitle, description, tags, href, repo }: Project) {
   return (
     <article className="group border border-edge p-6 hover:border-accent/50 transition-colors h-full flex flex-col">
-      <h3 className="text-lg font-sans font-semibold text-foreground mb-2 group-hover:text-foreground/70 transition-colors">
+      <h3 className="text-lg font-sans font-semibold text-foreground mb-1 group-hover:text-foreground/70 transition-colors">
         {title}
       </h3>
+      {subtitle && (
+        <p className="text-xs text-muted font-mono mb-2">{subtitle}</p>
+      )}
       <p className="text-muted text-sm leading-relaxed mb-4 flex-1">{description}</p>
       <ul className="flex flex-wrap gap-2 mb-5" aria-label="Technologies used">
         {tags.map((tag) => (

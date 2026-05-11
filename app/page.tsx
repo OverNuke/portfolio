@@ -6,7 +6,7 @@ import { Projects } from './_components/sections/Projects'
 import { Skills } from './_components/sections/Skills'
 export default function Home() {
   return (
-    <main id="main-content">
+    <main id="main-content" className="flex flex-col gap-16">
       <Hero />
       <About />
       <Projects />

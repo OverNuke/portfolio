@@ -2,43 +2,88 @@ import type { Certificate, Project, Skill, SocialLink } from './types'
 
 export const PROJECTS: Project[] = [
   {
-    title: 'Project One',
-    description: 'Describe what this project does and the problem it solves.',
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    title: 'Barbershop',
+    subtitle: 'Final project for Web Development Course',
+    description:
+      'Backend for an online booking system for a barbershop. Includes booking management, notifications, and full API documentation in the project wiki.',
+    tags: ['Express', 'JavaScript', 'Docker', 'MySQL'],
     href: '#',
-    repo: '#',
+    repo: 'https://github.com/Sinhularity/barbershop',
     featured: true,
+    image: '/projects/barbershop/user.png',
   },
   {
-    title: 'Project Two',
-    description: 'Describe what this project does and the problem it solves.',
-    tags: ['React', 'Node.js', 'PostgreSQL'],
+    title: 'AcopiaTech',
+    subtitle: 'Mobile app for e-waste donation',
+    description:
+      'Allows users to find nearby e-waste collection points, schedule pickups, and learn about proper e-waste disposal.',
+    tags: ['Google Maps API', 'Flutter', 'Dart', 'Firebase'],
     href: '#',
-    repo: '#',
+    repo: 'https://github.com/Sinhularity/acopiatech-app',
+    featured: true,
+    image: '/projects/acopiatech/main.jpg',
   },
   {
-    title: 'Project Three',
-    description: 'Describe what this project does and the problem it solves.',
-    tags: ['TypeScript', 'REST API'],
+    title: 'Odoo Custom Module',
+    subtitle: 'Document management module for a local company',
+    description:
+      'Maintenance and new features for a custom Odoo module handling document management workflows.',
+    tags: ['Odoo', 'Python', 'PostgreSQL'],
     href: '#',
-    repo: '#',
+    featured: true,
+    image: '/projects/odoo/access.png',
   },
 ]
 
+
 export const CERTIFICATES: Certificate[] = [
   {
-    title: 'Certificate Title',
-    issuer: 'Issuing Organization',
-    date: '2024',
-    href: '#',
+    title: 'ANFECA Academic Recognition',
+    issuer: 'ANFECA',
+    date: '2025',
+    href: '/certificates/ANFECA_Certificate.jpg',
+    category: 'academic',
+    shape: 'hero',
+    ext: 'JPG',
   },
   {
-    title: 'Certificate Title',
-    issuer: 'Issuing Organization',
-    date: '2023',
-    href: '#',
+    title: 'TOEFL Certificate',
+    issuer: 'SEP',
+    date: '2018',
+    href: '/certificates/sepToelf.pdf',
+    category: 'language',
+    shape: 'circle',
+    ext: 'PDF',
+  },
+  {
+    title: 'English Language Certificate',
+    issuer: 'Anglo Mexicano de Coatzacoalcos',
+    date: '2021',
+    href: '/certificates/anglo.pdf',
+    category: 'academic',
+    shape: 'pill',
+    ext: 'PDF',
+  },
+  {
+    title: 'EXAVER Language Proficiency',
+    issuer: 'Universidad Veracruzana',
+    date: '2022',
+    href: '/certificates/exaver.pdf',
+    category: 'language',
+    shape: 'strip',
+    ext: 'PDF',
+  },
+  {
+    title: 'Nota Laudatoria',
+    issuer: 'Universidad',
+    date: '2025',
+    href: '/certificates/notaLaudatoria.pdf',
+    category: 'honors',
+    shape: 'portrait',
+    ext: 'PDF',
   },
 ]
+
 
 export const SKILLS: Skill[] = [
   { name: 'TypeScript', category: 'language' },
@@ -55,7 +100,7 @@ export const SKILLS: Skill[] = [
 ]
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  { label: 'GitHub', href: 'https://github.com', icon: '/github-light.svg' },
-  { label: 'LinkedIn', href: 'https://linkedin.com', icon: '/linkedin.svg' },
+  { label: 'GitHub', href: 'https://github.com/OverNuke', icon: '/github-light.svg' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/keffwontwakeup/', icon: '/linkedin.svg' },
   { label: 'Email', href: 'mailto:ksfgarcia24@gmail.com', icon: '/gmail.svg' },
 ]

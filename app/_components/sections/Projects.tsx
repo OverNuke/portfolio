@@ -5,7 +5,7 @@ import { ProjectShowcase } from '../ui/ProjectShowcase'
 
 export function Projects() {
   return (
-    <section id="projects" className="py-24" aria-labelledby="projects-heading">
+    <section id="projects" className="py-32" aria-labelledby="projects-heading">
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
         <SectionHeading label="// 02" id="projects-heading">
           Projects
