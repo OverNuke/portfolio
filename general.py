@@ -5,9 +5,10 @@ def word_search(grid: list[list[str]], word: str) -> bool:
     2. Buscar letras están en el grid
     3. Buscar en ubicaciones adyacentes
     """
+    locations = set()
     for letter in word:
-        if letter not in grid:
-            return False
+        if letter in grid:
+            
 
     return True
 

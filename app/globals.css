@@ -8,6 +8,7 @@
   /* Typography */
   --font-sans: var(--font-gc-prop), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-gc-mono), ui-monospace, monospace;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
 
   /* Colors — WCAG contrast ratios on --color-canvas (#0B0B0B)
    *
@@ -17,13 +18,13 @@
    *
    *  #E4E4E4 on Abyss Blue surface: 8.1:1 AAA
    */
-  --color-canvas: #0B0B0B;        /* Void Eclipse  — background        */
-  --color-surface: #12182E;       /* between canvas and abyss          */
-  --color-surface-raised: #2B396D; /* Abyss Blue   — cards / panels     */
-  --color-accent: #2B396D;        /* Abyss Blue    — primary accent     */
-  --color-foreground: #E4E4E4;    /* Silver Mist   — primary text       */
-  --color-muted: #888888;         /* secondary text 5.3:1 on canvas     */
-  --color-edge: #1d2645;          /* subtle borders, blue-tinted        */
+  --color-canvas: #0b0b0b; /* Void Eclipse  — background        */
+  --color-surface: #12182e; /* between canvas and abyss          */
+  --color-surface-raised: #2b396d; /* Abyss Blue   — cards / panels     */
+  --color-accent: #2b396d; /* Abyss Blue    — primary accent     */
+  --color-foreground: #e4e4e4; /* Silver Mist   — primary text       */
+  --color-muted: #888888; /* secondary text 5.3:1 on canvas     */
+  --color-edge: #1d2645; /* subtle borders, blue-tinted        */
 }
 
 *,
@@ -42,11 +43,11 @@ html {
 }
 
 body {
+  margin: 1rem;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   min-height: 100dvh;
   color: var(--color-foreground);
-  margin: 1rem;
   font-weight: 300;
 }
 
@@ -104,38 +105,38 @@ body {
    *  WCAG text contrast on #2B396D surface:
    *    #E4E4E4   8.1:1  AAA ✓   ← text on blue surfaces
    * ─────────────────────────────────────────────────────── */
-  --background:            #0B0B0B;   /* Void Eclipse                    */
-  --foreground:            #E4E4E4;   /* Silver Mist  — 14.9:1 AAA ✓    */
-  --card:                  #12182E;   /* dark surface                    */
-  --card-foreground:       #E4E4E4;   /* Silver Mist  —  8.1:1 AAA ✓    */
-  --popover:               #12182E;
-  --popover-foreground:    #E4E4E4;
-  --primary:               #2B396D;   /* Abyss Blue — bg use only        */
-  --primary-foreground:    #E4E4E4;   /* Silver Mist  —  8.1:1 AAA ✓    */
-  --secondary:             #1d2645;   /* edge / deep navy                */
-  --secondary-foreground:  #E4E4E4;
-  --muted:                 #888888;   /* secondary text — 5.3:1 AA ✓    */
-  --muted-foreground:      #888888;
-  --accent:                #2B396D;   /* Abyss Blue — bg use only        */
-  --accent-foreground:     #E4E4E4;   /* Silver Mist  —  8.1:1 AAA ✓    */
-  --destructive:           oklch(0.577 0.245 27.325);
-  --border:                #1d2645;
-  --input:                 #1d2645;
-  --ring:                  #2B396D;
-  --chart-1:               #2B396D;
-  --chart-2:               #E4E4E4;
-  --chart-3:               #888888;
-  --chart-4:               #1d2645;
-  --chart-5:               #12182E;
-  --radius:                0.625rem;
-  --sidebar:               #12182E;
-  --sidebar-foreground:    #E4E4E4;
-  --sidebar-primary:       #2B396D;
-  --sidebar-primary-foreground: #E4E4E4;
-  --sidebar-accent:        #2B396D;
-  --sidebar-accent-foreground: #E4E4E4;
-  --sidebar-border:        #1d2645;
-  --sidebar-ring:          #2B396D;
+  --background: #0b0b0b; /* Void Eclipse                    */
+  --foreground: #e4e4e4; /* Silver Mist  — 14.9:1 AAA ✓    */
+  --card: #12182e; /* dark surface                    */
+  --card-foreground: #e4e4e4; /* Silver Mist  —  8.1:1 AAA ✓    */
+  --popover: #12182e;
+  --popover-foreground: #e4e4e4;
+  --primary: #2b396d; /* Abyss Blue — bg use only        */
+  --primary-foreground: #e4e4e4; /* Silver Mist  —  8.1:1 AAA ✓    */
+  --secondary: #1d2645; /* edge / deep navy                */
+  --secondary-foreground: #e4e4e4;
+  --muted: #888888; /* secondary text — 5.3:1 AA ✓    */
+  --muted-foreground: #888888;
+  --accent: #2b396d; /* Abyss Blue — bg use only        */
+  --accent-foreground: #e4e4e4; /* Silver Mist  —  8.1:1 AAA ✓    */
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #1d2645;
+  --input: #1d2645;
+  --ring: #2b396d;
+  --chart-1: #2b396d;
+  --chart-2: #e4e4e4;
+  --chart-3: #888888;
+  --chart-4: #1d2645;
+  --chart-5: #12182e;
+  --radius: 0.625rem;
+  --sidebar: #12182e;
+  --sidebar-foreground: #e4e4e4;
+  --sidebar-primary: #2b396d;
+  --sidebar-primary-foreground: #e4e4e4;
+  --sidebar-accent: #2b396d;
+  --sidebar-accent-foreground: #e4e4e4;
+  --sidebar-border: #1d2645;
+  --sidebar-ring: #2b396d;
 }
 
 @layer base {
