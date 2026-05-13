@@ -1,6 +1,6 @@
 import type React from "react";
 import Link from "next/link";
-import { LiquidMetalButton } from "./liquid-metal-button";
+import { RetroPlayTile } from "./retro-buttons";
 
 interface FooterProps {
   logo: React.ReactNode;
@@ -44,15 +44,14 @@ export function Footer({
             {logo}
             <span className="font-bold text-xl">{brandName}</span>
           </Link>
-          <ul className="flex list-none mt-6 md:mt-0 gap-x-1">
+          <ul className="flex list-none mt-6 md:mt-0 gap-x-2">
             {socialLinks.map((link, i) => (
               <li key={i}>
-                <LiquidMetalButton
-                  label={link.label}
-                  viewMode="icon"
+                <RetroPlayTile
+                  aria-label={link.label}
                   onClick={() => window.open(link.href, "_blank", "noopener")}
                   icon={link.icon}
-                ></LiquidMetalButton>
+                />
               </li>
             ))}
           </ul>

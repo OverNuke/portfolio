@@ -4,8 +4,6 @@ import { gsap } from "gsap";
 import type React from "react";
 import type { CSSProperties, ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
-import { LiquidMetalBackground } from "@/components/ui/liquid-metal-background";
-import { LiquidMetalShell } from "@/components/ui/liquid-metal-shell";
 import styles from "./BubbleMenu.module.css";
 
 type MenuItem = {
@@ -32,8 +30,6 @@ export type BubbleMenuProps = {
   animationEase?: string;
   animationDuration?: number;
   staggerDelay?: number;
-  useMetalToggle?: boolean;
-  useMetalOverlay?: boolean;
 };
 
 const DEFAULT_ITEMS: MenuItem[] = [
@@ -87,14 +83,9 @@ export default function BubbleMenu({
   animationEase = "back.out(1.5)",
   animationDuration = 0.5,
   staggerDelay = 0.12,
-  useMetalToggle = false,
-  useMetalOverlay = false,
 }: BubbleMenuProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
-  const [isToggleHovered, setIsToggleHovered] = useState(false);
-  const [isTogglePressed, setIsTogglePressed] = useState(false);
-  const [metalToggleSize, setMetalToggleSize] = useState(48);
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const bubblesRef = useRef<HTMLAnchorElement[]>([]);
@@ -211,15 +202,8 @@ export default function BubbleMenu({
     return () => window.removeEventListener("resize", handleResize);
   }, [isMenuOpen, menuItems]);
 
-  useEffect(() => {
-    if (!useMetalToggle) return;
-    const update = () => setMetalToggleSize(window.innerWidth >= 768 ? 56 : 48);
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, [useMetalToggle]);
-
-  // The toggle button element — shared between metal and plain variants
+  // Retro M03-derived toggle: abyss square, 2px radius, no chevron cascade.
+  // Press: translateY(1px) via :active. Hamburger lines rotate into X on open.
   const toggleButton = (
     <button
       ref={toggleButtonRef}
@@ -228,25 +212,12 @@ export default function BubbleMenu({
       aria-label={menuAriaLabel}
       aria-expanded={isMenuOpen}
       aria-controls="bubble-overlay"
-      onMouseEnter={useMetalToggle ? () => setIsToggleHovered(true) : undefined}
-      onMouseLeave={
-        useMetalToggle
-          ? () => {
-              setIsToggleHovered(false);
-              setIsTogglePressed(false);
-            }
-          : undefined
-      }
-      onMouseDown={
-        useMetalToggle ? () => setIsTogglePressed(true) : undefined
-      }
-      onMouseUp={useMetalToggle ? () => setIsTogglePressed(false) : undefined}
-      className={
-        useMetalToggle
-          ? "inline-flex flex-col items-center justify-center border-0 cursor-pointer p-0 will-change-transform w-full h-full bg-transparent"
-          : "inline-flex flex-col items-center justify-center rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.3)] pointer-events-auto w-12 h-12 md:w-14 md:h-14 border-0 cursor-pointer p-0 will-change-transform"
-      }
-      style={useMetalToggle ? {} : { background: menuBg }}
+      className="pointer-events-auto inline-flex flex-col items-center justify-center border-0 cursor-pointer p-0 will-change-transform w-12 h-12 md:w-14 md:h-14 active:translate-y-px transition-transform"
+      style={{
+        background: "var(--color-accent)",
+        borderRadius: 2,
+        WebkitTapHighlightColor: "transparent",
+      }}
     >
       <span
         className={styles.menuLine}
@@ -304,20 +275,7 @@ export default function BubbleMenu({
             </span>
           </a>
 
-          {useMetalToggle ? (
-            <div className="pointer-events-auto w-12 h-12 md:w-14 md:h-14 will-change-transform">
-              <LiquidMetalShell
-                width={metalToggleSize}
-                height={metalToggleSize}
-                isHovered={isToggleHovered}
-                isPressed={isTogglePressed}
-              >
-                {toggleButton}
-              </LiquidMetalShell>
-            </div>
-          ) : (
-            toggleButton
-          )}
+          {toggleButton}
         </div>
       </nav>
 
@@ -329,9 +287,6 @@ export default function BubbleMenu({
           aria-hidden={!isMenuOpen}
           onClick={handleBackdropClick}
         >
-          {useMetalOverlay && (
-            <LiquidMetalBackground opacity={0.3} />
-          )}
           <ul
             className={`list-none m-0 px-6 w-full max-w-[1600px] mx-auto flex flex-wrap gap-x-0 gap-y-1 pointer-events-auto ${styles.pillList}`}
             role="menu"
@@ -354,7 +309,7 @@ export default function BubbleMenu({
                       "--hover-bg": item.hoverStyles?.bgColor ?? "#f3f4f6",
                       "--hover-color":
                         item.hoverStyles?.textColor ?? menuContentColor,
-                      background: useMetalOverlay ? "rgba(11, 11, 11, 0.35)" : menuBg,
+                      background: menuBg,
                       color: menuContentColor,
                       minHeight: "var(--pill-min-h, 160px)",
                       padding: "clamp(1.5rem, 3vw, 8rem) 0",

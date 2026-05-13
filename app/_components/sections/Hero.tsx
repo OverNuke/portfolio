@@ -1,8 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
-import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
+import { RetroEnter } from "@/components/ui/retro-buttons";
 import { LayeredText } from "../ui/LayeredText";
 
 const NAME_LINES = [
@@ -20,35 +19,11 @@ const PARAGRAPH =
   "Software engineer, like backend development but open to frontend and mobile.";
 
 const SCROLL_TARGETS = [
-  {
-    id: "about",
-    label: "View about me",
-    icon: "/section-icons/account_circle.svg",
-    alt: "Account circle icon",
-    variant: "ghost" as const,
-  },
-  {
-    id: "projects",
-    label: "View projects",
-    icon: "/section-icons/folder_code.svg",
-    alt: "Folder with code icon",
-    variant: undefined,
-  },
-  {
-    id: "certificates",
-    label: "View certificates and skills",
-    icon: "/section-icons/history_edu.svg",
-    alt: "History edu icon",
-    variant: "ghost" as const,
-  },
-  {
-    id: "contact",
-    label: "Contact me",
-    icon: "/section-icons/connect_without_contact.svg",
-    alt: "Connect without contact icon",
-    variant: undefined,
-  },
-];
+  { id: "about", label: "ABOUT", aria: "View about me" },
+  { id: "projects", label: "PROJECTS", aria: "View projects" },
+  { id: "certificates", label: "CERTIFICATES", aria: "View certificates and skills" },
+  { id: "contact", label: "CONTACT", aria: "Contact me" },
+] as const;
 
 // Sharp deceleration — luxury fashion pacing
 const SHARP = [0.76, 0, 0.24, 1] as const;
@@ -125,7 +100,7 @@ export function Hero() {
 
             {/* Buttons — two rows, second row offset for asymmetric composition */}
             <div className="flex flex-col gap-3">
-              <div className="flex gap-3">
+              <div className="flex flex-wrap gap-3">
                 {SCROLL_TARGETS.slice(0, 2).map((t, i) => (
                   <motion.div
                     key={t.id}
@@ -133,21 +108,20 @@ export function Hero() {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.12, delay: 0.55 + i * 0.07 }}
                   >
-                    <LiquidMetalButton
+                    <RetroEnter
                       label={t.label}
+                      aria-label={t.aria}
                       onClick={() =>
                         document
                           .getElementById(t.id)
                           ?.scrollIntoView({ behavior: "smooth" })
                       }
-                      variant={t.variant}
-                      viewMode="icon"
-                      icon={<Image src={t.icon} alt={t.alt} width={20} height={20} />}
+                      minWidth={200}
                     />
                   </motion.div>
                 ))}
               </div>
-              <div className="flex gap-3 ml-8 sm:ml-12">
+              <div className="flex flex-wrap gap-3 ml-8 sm:ml-12">
                 {SCROLL_TARGETS.slice(2).map((t, i) => (
                   <motion.div
                     key={t.id}
@@ -155,16 +129,15 @@ export function Hero() {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.12, delay: 0.69 + i * 0.07 }}
                   >
-                    <LiquidMetalButton
+                    <RetroEnter
                       label={t.label}
+                      aria-label={t.aria}
                       onClick={() =>
                         document
                           .getElementById(t.id)
                           ?.scrollIntoView({ behavior: "smooth" })
                       }
-                      variant={t.variant}
-                      viewMode="icon"
-                      icon={<Image src={t.icon} alt={t.alt} width={20} height={20} />}
+                      minWidth={200}
                     />
                   </motion.div>
                 ))}

@@ -37,7 +37,7 @@ export const PROJECTS: Project[] = [
     title: 'Personal Portfolio',
     subtitle: 'My personal developer portfolio',
     description:
-      "The site you're looking at. Dot-field background, liquid-metal accents and a project section that tries to feel like both a gallery and a terminal.",
+      "The site you're looking at. Dot-field background, retro game-button accents and a project section that tries to feel like both a gallery and a terminal.",
     tags: ['next.js', 'typescript', 'tailwind', 'shaders'],
     href: '/projects/portfolio',
     repo: 'https://github.com/OverNuke/portfolio',
