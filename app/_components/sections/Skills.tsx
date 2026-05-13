@@ -17,9 +17,9 @@ const TECH_LOGOS = [
 
 export function Skills() {
   return (
-    <section id="skills" className="py-32" aria-labelledby="skills-heading">
+    <section id="skills" className="py-section-sm md:py-section" aria-labelledby="skills-heading">
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
-        <SectionHeading label="// 04" id="skills-heading">
+        <SectionHeading id="skills-heading">
           Skills
         </SectionHeading>
         <div

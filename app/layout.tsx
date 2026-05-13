@@ -5,7 +5,6 @@ import "./globals.css";
 import BubbleMenu from "./_components/ui/BubbleMenu";
 import { Footer } from "./_components/layout/Footer";
 import { cn } from "@/lib/utils";
-import { DotFieldBackground } from "./_components/layout/DotFieldBackground";
 import IdleAnimation from "@/components/ui/idle-animation";
 
 const gcMono = localFont({
@@ -54,7 +53,6 @@ export default function RootLayout({
       )}
     >
       <body>
-        <DotFieldBackground />
         <BubbleMenu logo={logo} useMetalToggle />
         {children}
         <Footer />

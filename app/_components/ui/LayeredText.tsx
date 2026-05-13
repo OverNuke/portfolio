@@ -156,7 +156,7 @@ export function LayeredText({
                 transform: row.transform,
                 color: row.topColor,
                 "--md-height": `${lineHeightMd}px`,
-                clipPath: 'inset(0)',
+                overflow: 'hidden',
               } as React.CSSProperties
             }
           >

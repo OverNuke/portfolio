@@ -49,7 +49,7 @@ export function Hero() {
             An alien amoung humans beings who codes
           </span>
         </div>
-        <p className="text-muted text-lg max-w-xl leading-relaxed mb-10 border-l border-foreground/10 pl-5">
+        <p className="text-muted text-lg max-w-xl leading-relaxed mb-10 pl-5">
           Software engineer, like backend development but open to frontend and
           mobile.
         </p>
