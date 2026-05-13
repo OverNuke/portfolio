@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
-import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
+import { RetroGameButton } from "@/components/ui/retro-game-button";
 import { LayeredText } from "../ui/LayeredText";
 
 const NAME_LINES = [
@@ -133,7 +133,7 @@ export function Hero() {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.12, delay: 0.55 + i * 0.07 }}
                   >
-                    <LiquidMetalButton
+                    <RetroGameButton
                       label={t.label}
                       onClick={() =>
                         document
@@ -155,7 +155,7 @@ export function Hero() {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.12, delay: 0.69 + i * 0.07 }}
                   >
-                    <LiquidMetalButton
+                    <RetroGameButton
                       label={t.label}
                       onClick={() =>
                         document

@@ -62,7 +62,7 @@ export default function RootLayout({
     >
       <body>
         <ClientAnimations />
-        <BubbleMenu logo={logo} useMetalToggle />
+        <BubbleMenu logo={logo} />
         {children}
         <Footer />
       </body>
