@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { gsap } from "gsap";
 import type React from "react";
 
@@ -50,7 +50,6 @@ export function LayeredText({
 }: LayeredTextProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
-  const [extraBottom, setExtraBottom] = useState(0);
 
   useEffect(() => {
     if (!animate) return;
@@ -103,31 +102,6 @@ export function LayeredText({
     [lines, staggerX, colorByWord, lineColors],
   );
 
-  useLayoutEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    function measure() {
-      const listEl = container!.querySelector("ul");
-      if (!listEl) return;
-      const ulBottom = listEl.getBoundingClientRect().bottom;
-      let maxBottom = ulBottom;
-      listEl.querySelectorAll("li").forEach((li) => {
-        maxBottom = Math.max(maxBottom, li.getBoundingClientRect().bottom);
-      });
-      const overflow = Math.max(0, maxBottom - ulBottom);
-      setExtraBottom((prev) =>
-        Math.abs(prev - overflow) > 0 ? overflow : prev,
-      );
-    }
-
-    measure();
-
-    const ro = new ResizeObserver(measure);
-    ro.observe(container);
-    return () => ro.disconnect();
-  }, [rows]);
-
   return (
     <div
       ref={containerRef}
@@ -138,12 +112,11 @@ export function LayeredText({
         {
           fontSize,
           fontWeight: 900,
-          ...(extraBottom > 0 && { paddingBottom: `${extraBottom}px` }),
         } as React.CSSProperties
       }
     >
       <ul
-        className="list-none p-1 m-1 flex flex-col items-center"
+        className="list-none flex flex-col items-center"
         style={{ gap: lineGap > 0 ? `${lineGap}px` : undefined }}
       >
         {rows.map((row, index) => (
@@ -152,16 +125,34 @@ export function LayeredText({
             className="relative"
             style={
               {
+                width: "max-content",
                 height: `${lineHeight}px`,
                 transform: row.transform,
                 color: row.topColor,
-                "--md-height": `${lineHeightMd}px`,
-                overflow: 'hidden',
+                overflow: "clip",
+                clipPath: "inset(0)",
+                willChange: "transform",
               } as React.CSSProperties
             }
           >
-            <p style={{ lineHeight: `${lineHeight}px` }}>{row.line.top}</p>
-            <p style={{ lineHeight: `${lineHeight}px` }}>{row.line.bottom}</p>
+            <p
+              style={{
+                height: `${lineHeight}px`,
+                lineHeight: `${lineHeight}px`,
+                margin: 0,
+              }}
+            >
+              {row.line.top}
+            </p>
+            <p
+              style={{
+                height: `${lineHeight}px`,
+                lineHeight: `${lineHeight}px`,
+                margin: 0,
+              }}
+            >
+              {row.line.bottom}
+            </p>
           </li>
         ))}
       </ul>
