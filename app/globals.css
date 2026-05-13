@@ -25,6 +25,19 @@
   --color-foreground: #e4e4e4; /* Silver Mist   — primary text       */
   --color-muted: #888888; /* secondary text 5.3:1 on canvas     */
   --color-edge: #1d2645; /* subtle borders, blue-tinted        */
+
+  /* Spacing scale — section layout tokens
+   *  section:     8rem  (= py-32) desktop vertical padding
+   *  section-sm:  5rem  (= py-20) mobile vertical padding
+   *  heading:     4rem  (= mb-16) below section headings
+   *  content:   1.5rem  (= mb-6)  between content blocks
+   *  gutter:    1.5rem  (= px-6)  horizontal section padding
+   */
+  --spacing-section: 8rem;
+  --spacing-section-sm: 5rem;
+  --spacing-heading: 4rem;
+  --spacing-content: 1.5rem;
+  --spacing-gutter: 1.5rem;
 }
 
 *,

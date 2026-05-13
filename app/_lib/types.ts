@@ -8,6 +8,7 @@ export interface Project {
   featured?: boolean
   image?: string
   year?: string
+  medium?: string
 }
 
 export type CertificateCategory = 'academic' | 'language' | 'honors'
