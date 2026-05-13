@@ -9,6 +9,7 @@
   --font-sans: var(--font-gc-prop), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-gc-mono), ui-monospace, monospace;
   --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+  --font-display: var(--font-zerone), ui-sans-serif, system-ui, sans-serif;
 
   /* Colors — WCAG contrast ratios on --color-canvas (#0B0B0B)
    *
