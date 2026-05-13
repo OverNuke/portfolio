@@ -37,9 +37,9 @@ const DEFAULT_LINES: LayeredTextLine[] = [
 export function LayeredText({
   lines = DEFAULT_LINES,
   colorByWord,
-  fontSize = "72px",
+  fontSize = "77px",
   fontSizeMd = "36px",
-  lineHeight = 88,
+  lineHeight = 96,
   lineHeightMd = 44,
   staggerX = 14,
   staggerXMd = 8,

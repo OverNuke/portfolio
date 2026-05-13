@@ -1,3 +1,5 @@
+# Cinematic typography animation
+
 Create a cinematic typography animation for a Next.js portfolio .
 
 Style reference:

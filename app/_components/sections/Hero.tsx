@@ -50,9 +50,13 @@ const SCROLL_TARGETS = [
   },
 ];
 
+// Sharp deceleration — luxury fashion pacing
+const SHARP = [0.76, 0, 0.24, 1] as const;
+// Hard cut — staccato entrance
+const CUT = [0.7, 0, 0.3, 1] as const;
+
 export function Hero() {
   const prefersReducedMotion = useReducedMotion();
-  const words = PARAGRAPH.split(/(\s+)/);
 
   return (
     <section
@@ -65,78 +69,109 @@ export function Hero() {
       </h1>
 
       <div className="max-w-6xl mx-auto px-6 sm:px-8 pt-0 pb-16 w-full">
-        <LayeredText
-          lines={NAME_LINES}
-          lineColors={NAME_LINE_COLORS}
-          animate={true}
-          lineGap={10}
-          className="mb-12 sm:mb-16"
-          fontSize="clamp(2.75rem, 8vw, 4.5rem)"
-        />
+        <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-y-12 lg:gap-y-0 lg:gap-x-16 items-start">
 
-        {/* Asymmetric two-column block: role label + tagline (left, w/ rule)
-            and paragraph (right, offset). Falls back to a single column < lg. */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-8 lg:gap-x-10 mb-12">
-          <div className="lg:col-span-4 lg:border-l lg:border-foreground/15 lg:pl-6">
-            <div className="flex items-center gap-3 mb-3" aria-hidden="true">
-              <div className="w-6 h-px bg-foreground/40" />
-              <span className="font-mono text-[10px] tracking-[0.4em] text-foreground/50 uppercase">
-                Role
-              </span>
-            </div>
-            <p className="font-mono text-xs sm:text-sm tracking-wide text-foreground/80 leading-relaxed">
-              An alien among humans beings who codes.
-            </p>
-          </div>
+          {/* LEFT — animated name */}
+          <LayeredText
+            lines={NAME_LINES}
+            lineColors={NAME_LINE_COLORS}
+            animate={true}
+            lineGap={10}
+            fontSize="clamp(2rem, 6vw, 3.5rem)"
+          />
 
-          <motion.p
-            className="lg:col-span-7 lg:col-start-6 text-muted leading-relaxed text-[clamp(1rem,1vw+0.65rem,1.2rem)] max-w-2xl"
-            initial={prefersReducedMotion ? false : "hidden"}
-            animate="visible"
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.04 } },
-            }}
-          >
-            {words.map((word, i) =>
-              /^\s+$/.test(word) ? (
-                <span key={i}>{word}</span>
-              ) : (
+          {/* RIGHT — role, paragraph, buttons */}
+          <div className="flex flex-col">
+
+            {/* Role label */}
+            <div className="mb-6 lg:mb-8 lg:border-l lg:border-foreground/15 lg:pl-6">
+              <div className="flex items-center gap-3 mb-3" aria-hidden="true">
+                <motion.div
+                  className="w-6 h-px bg-foreground/40 origin-left"
+                  initial={prefersReducedMotion ? false : { scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 0.25, delay: 0.1, ease: CUT }}
+                />
                 <motion.span
-                  key={i}
-                  className="inline-block"
-                  variants={{
-                    hidden: { opacity: 0, y: 12, filter: "blur(6px)" },
-                    visible: {
-                      opacity: 1,
-                      y: 0,
-                      filter: "blur(0px)",
-                      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-                    },
-                  }}
+                  className="font-mono text-[10px] tracking-[0.4em] text-foreground/50 uppercase"
+                  initial={prefersReducedMotion ? false : { opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.15, delay: 0.2 }}
                 >
-                  {word}
+                  Role
                 </motion.span>
-              ),
-            )}
-          </motion.p>
-        </div>
+              </div>
+              <motion.p
+                className="font-mono text-xs sm:text-sm tracking-wide text-foreground/80 leading-relaxed"
+                initial={prefersReducedMotion ? false : { opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.15, delay: 0.3 }}
+              >
+                An alien among humans beings who codes.
+              </motion.p>
+            </div>
 
-        <div className="flex flex-wrap gap-4">
-          {SCROLL_TARGETS.map((t) => (
-            <LiquidMetalButton
-              key={t.id}
-              label={t.label}
-              onClick={() =>
-                document
-                  .getElementById(t.id)
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
-              variant={t.variant}
-              viewMode="icon"
-              icon={<Image src={t.icon} alt={t.alt} width={20} height={20} />}
-            />
-          ))}
+            {/* Paragraph — clip-path reveal, no word-by-word */}
+            <div className="overflow-hidden mb-8 lg:mb-10">
+              <motion.p
+                className="text-muted leading-relaxed text-[clamp(1rem,1vw+0.65rem,1.2rem)] max-w-2xl"
+                initial={prefersReducedMotion ? false : { clipPath: "inset(100% 0 0% 0)" }}
+                animate={{ clipPath: "inset(0% 0 0% 0)" }}
+                transition={{ duration: 0.5, delay: 0.35, ease: SHARP }}
+              >
+                {PARAGRAPH}
+              </motion.p>
+            </div>
+
+            {/* Buttons — two rows, second row offset for asymmetric composition */}
+            <div className="flex flex-col gap-3">
+              <div className="flex gap-3">
+                {SCROLL_TARGETS.slice(0, 2).map((t, i) => (
+                  <motion.div
+                    key={t.id}
+                    initial={prefersReducedMotion ? false : { opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.12, delay: 0.55 + i * 0.07 }}
+                  >
+                    <LiquidMetalButton
+                      label={t.label}
+                      onClick={() =>
+                        document
+                          .getElementById(t.id)
+                          ?.scrollIntoView({ behavior: "smooth" })
+                      }
+                      variant={t.variant}
+                      viewMode="icon"
+                      icon={<Image src={t.icon} alt={t.alt} width={20} height={20} />}
+                    />
+                  </motion.div>
+                ))}
+              </div>
+              <div className="flex gap-3 ml-8 sm:ml-12">
+                {SCROLL_TARGETS.slice(2).map((t, i) => (
+                  <motion.div
+                    key={t.id}
+                    initial={prefersReducedMotion ? false : { opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.12, delay: 0.69 + i * 0.07 }}
+                  >
+                    <LiquidMetalButton
+                      label={t.label}
+                      onClick={() =>
+                        document
+                          .getElementById(t.id)
+                          ?.scrollIntoView({ behavior: "smooth" })
+                      }
+                      variant={t.variant}
+                      viewMode="icon"
+                      icon={<Image src={t.icon} alt={t.alt} width={20} height={20} />}
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </section>
