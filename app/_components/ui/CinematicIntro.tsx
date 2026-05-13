@@ -44,12 +44,16 @@ const BEATS: Beat[] = [
   { label: "KEVIN", treatment: "settled", tag: "VI" },
 ];
 
-const BEAT_MS = 520;
+const BEAT_MS = 760;
+const FINAL_HOLD_S = 1.4;
 const STORAGE_KEY = "intro:played";
 
 export function CinematicIntro() {
   const prefersReducedMotion = useReducedMotion();
-  const [active, setActive] = useState(false);
+  // Start active so the overlay is present in the SSR'd HTML and covers
+  // the hero before hydration completes. The effect below flips it off
+  // when the intro has already played this session or motion is reduced.
+  const [active, setActive] = useState(true);
   const [beat, setBeat] = useState(0);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
 
@@ -63,14 +67,14 @@ export function CinematicIntro() {
   }, []);
 
   useEffect(() => {
-    // Skip on subsequent navigations within the same tab session.
     let played = false;
     try {
       played = sessionStorage.getItem(STORAGE_KEY) === "1";
     } catch {}
-    if (played || prefersReducedMotion) return;
-
-    setActive(true);
+    if (played || prefersReducedMotion) {
+      setActive(false);
+      return;
+    }
 
     // Lock scroll while the intro plays.
     const prevOverflow = document.documentElement.style.overflow;
@@ -90,7 +94,7 @@ export function CinematicIntro() {
       tl.call(() => setBeat(i), undefined, i * (BEAT_MS / 1000));
     });
     // Hold the final beat slightly longer before dismissal.
-    tl.to({}, { duration: 0.72 });
+    tl.to({}, { duration: FINAL_HOLD_S });
 
     tlRef.current = tl;
 
@@ -300,11 +304,11 @@ function SettledBeat({ label }: { label: string }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={SOFT_CUT}
-      className="flex flex-col items-center gap-6"
+      className="flex flex-col items-center"
     >
       <span
         aria-hidden
-        className="font-mono text-[10px] tracking-[0.5em] text-foreground/40 uppercase"
+        className="font-mono text-[10px] tracking-[0.5em] text-foreground/40 uppercase mb-14 sm:mb-16"
       >
         — portfolio —
       </span>
@@ -313,8 +317,10 @@ function SettledBeat({ label }: { label: string }) {
           fontFamily: "var(--font-display)",
           fontWeight: 200,
           fontSize: "clamp(4rem, 14vw, 12rem)",
-          lineHeight: 0.9,
+          lineHeight: 1,
           letterSpacing: "-0.04em",
+          paddingTop: "0.12em",
+          paddingBottom: "0.12em",
         }}
         className="text-foreground"
       >
@@ -322,7 +328,7 @@ function SettledBeat({ label }: { label: string }) {
       </h2>
       <span
         aria-hidden
-        className="font-mono text-[10px] tracking-[0.4em] text-foreground/40 uppercase"
+        className="font-mono text-[10px] tracking-[0.4em] text-foreground/40 uppercase mt-14 sm:mt-16"
       >
         Kevin · Sebastián · Frías · García
       </span>
