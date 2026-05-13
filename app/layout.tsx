@@ -7,6 +7,7 @@ import { Footer } from "./_components/layout/Footer";
 import { cn } from "@/lib/utils";
 import IdleAnimation from "@/components/ui/idle-animation";
 import { CinematicIntro } from "./_components/ui/CinematicIntro";
+import { DotFieldBackground } from "./_components/layout/DotFieldBackground";
 
 const gcMono = localFont({
   src: "../public/GoogleSansCode-VariableFont_MONO,wght.ttf",
@@ -63,6 +64,7 @@ export default function RootLayout({
     >
       <body>
         <CinematicIntro />
+        <DotFieldBackground />
         <BubbleMenu logo={logo} useMetalToggle />
         {children}
         <Footer />

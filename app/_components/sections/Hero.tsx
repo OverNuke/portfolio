@@ -4,7 +4,6 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 import { LayeredText } from "../ui/LayeredText";
-import { HeroDotField } from "../layout/HeroDotField";
 
 const NAME_LINES = [
   { top: "Kevin", bottom: "García" },
@@ -60,26 +59,17 @@ export function Hero() {
       className="relative isolate min-h-screen overflow-hidden flex flex-col justify-center pt-16"
       aria-labelledby="hero-heading"
     >
-      <HeroDotField />
-
-      <span
-        className="absolute top-8 right-8 font-mono text-[10px] tracking-[0.5em] text-foreground/15 select-none uppercase"
-        aria-hidden="true"
-      >
-        001
-      </span>
-
       {/* Visually hidden h1 preserves heading hierarchy for screen readers / SEO */}
       <h1 id="hero-heading" className="sr-only">
         Kevin Sebastián Frías García
       </h1>
 
-      <div className="mx-auto w-full max-w-6xl px-6 sm:px-8 pb-16">
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 pt-0 pb-16 w-full">
         <LayeredText
           lines={NAME_LINES}
           lineColors={NAME_LINE_COLORS}
           animate={true}
-          lineGap={8}
+          lineGap={10}
           className="mb-12 sm:mb-16"
           fontSize="clamp(2.75rem, 8vw, 4.5rem)"
         />
@@ -144,9 +134,7 @@ export function Hero() {
               }
               variant={t.variant}
               viewMode="icon"
-              icon={
-                <Image src={t.icon} alt={t.alt} width={20} height={20} />
-              }
+              icon={<Image src={t.icon} alt={t.alt} width={20} height={20} />}
             />
           ))}
         </div>
