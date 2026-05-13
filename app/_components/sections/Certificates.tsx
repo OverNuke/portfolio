@@ -4,8 +4,8 @@ import { CertificateBento } from '../ui/CertificateBento'
 
 export function Certificates() {
   return (
-    <section id="certificates" className="py-section-sm md:py-section px-gutter" aria-labelledby="certs-heading">
-      <div className="max-w-6xl mx-auto px-6 sm:px-8">
+    <section id="certificates" className="py-section-sm md:py-section" aria-labelledby="certs-heading">
+      <div className="mx-auto w-full max-w-6xl px-6 sm:px-8">
         <SectionHeading id="certs-heading">
           Certificates
         </SectionHeading>

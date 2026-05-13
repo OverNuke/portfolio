@@ -1,8 +1,15 @@
 import DotField from "@/components/DotField";
 
-export function DotFieldBackground() {
+/**
+ * Hero-scoped background. Absolute so it is clipped to the parent section,
+ * preventing the effect from bleeding into the rest of the page.
+ */
+export function HeroDotField() {
   return (
-    <div className="fixed inset-0 -z-10 pointer-events-none">
+    <div
+      className="absolute inset-0 -z-10 pointer-events-none overflow-hidden"
+      aria-hidden="true"
+    >
       <DotField
         dotRadius={7}
         dotSpacing={14}
