@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { useIdlePhase, type IdlePhase } from "@/hooks/isIdle";
 
 const GIFS: Partial<Record<IdlePhase, string>> = {

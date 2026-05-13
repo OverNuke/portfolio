@@ -4,10 +4,8 @@ import { Playfair_Display } from "next/font/google";
 import "./globals.css";
 import BubbleMenu from "./_components/ui/BubbleMenu";
 import { Footer } from "./_components/layout/Footer";
+import { ClientAnimations } from "./_components/layout/ClientAnimations";
 import { cn } from "@/lib/utils";
-import IdleAnimation from "@/components/ui/idle-animation";
-import { CinematicIntro } from "./_components/ui/CinematicIntro";
-import { DotFieldBackground } from "./_components/layout/DotFieldBackground";
 
 const gcMono = localFont({
   src: "../public/GoogleSansCode-VariableFont_MONO,wght.ttf",
@@ -63,12 +61,10 @@ export default function RootLayout({
       )}
     >
       <body>
-        <CinematicIntro />
-        <DotFieldBackground />
+        <ClientAnimations />
         <BubbleMenu logo={logo} useMetalToggle />
         {children}
         <Footer />
-        <IdleAnimation />
       </body>
     </html>
   );

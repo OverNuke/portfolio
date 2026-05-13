@@ -126,7 +126,7 @@ export function CinematicIntro() {
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           onClick={dismiss}
           role="presentation"
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-canvas text-foreground cursor-pointer select-none"
+          className="fixed inset-0 z-9999 flex items-center justify-center bg-canvas text-foreground cursor-pointer select-none"
         >
           <CornerMarks beat={current.tag} total={BEATS.length} />
 
