@@ -6,6 +6,7 @@ import BubbleMenu from "./_components/ui/BubbleMenu";
 import { Footer } from "./_components/layout/Footer";
 import { cn } from "@/lib/utils";
 import IdleAnimation from "@/components/ui/idle-animation";
+import { CinematicIntro } from "./_components/ui/CinematicIntro";
 import { DotFieldBackground } from "./_components/layout/DotFieldBackground";
 
 const gcMono = localFont({
@@ -24,6 +25,13 @@ const gcProp = localFont({
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
+  display: "swap",
+});
+
+const kohinoorZerone = localFont({
+  src: "../public/fonts/KohinoorZerone-Zero.ttf",
+  variable: "--font-zerone",
+  weight: "200",
   display: "swap",
 });
 
@@ -51,9 +59,11 @@ export default function RootLayout({
         gcMono.variable,
         gcProp.variable,
         playfair.variable,
+        kohinoorZerone.variable,
       )}
     >
       <body>
+        <CinematicIntro />
         <DotFieldBackground />
         <BubbleMenu logo={logo} useMetalToggle />
         {children}
