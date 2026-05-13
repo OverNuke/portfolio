@@ -1,0 +1,332 @@
+/* Retro Game Buttons — Mark 01 to 06
+ * Transcribed from Claude Design bundle "Retro Game Buttons.html".
+ * CSS vars map directly to the project's existing palette tokens, so
+ * --color-accent === design's --abyss, --color-foreground === --silver, etc.
+ */
+
+.rb {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  transition: transform 160ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.rb:focus-visible {
+  outline: 2px solid var(--color-foreground);
+  outline-offset: 6px;
+}
+
+.rb:active {
+  transform: translateY(1px);
+}
+
+/* ── M01 · PRESS START · solid abyss slab ───────────────────────────── */
+.rb01 {
+  background: var(--color-accent);
+  padding: 22px 44px;
+  border-radius: 2px;
+  font-size: 13px;
+  letter-spacing: 0.32em;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.rb01 .lbl {
+  display: inline-block;
+  transition: letter-spacing 280ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.rb01:hover .lbl {
+  letter-spacing: 0.42em;
+}
+
+.rb01 .caret {
+  display: inline-block;
+  width: 0.55ch;
+  margin-left: 0.55ch;
+  background: #ffffff;
+  height: 1em;
+  transform: translateY(0.12em);
+  animation: rb-blink 1.2s steps(1) infinite;
+}
+
+@keyframes rb-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ── M02 · ENTER ▸ · wide outlined ──────────────────────────────────── */
+.rb02 {
+  background: transparent;
+  border: 1px solid var(--color-foreground);
+  padding: 20px 36px;
+  border-radius: 0;
+  font-family: var(--font-syne);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  min-width: 280px;
+  overflow: hidden;
+}
+
+.rb02 .row {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.rb02 .chev {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 18px;
+  transform: translateX(0);
+  transition: transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.rb02:hover .chev {
+  transform: translateX(10px);
+}
+
+/* ── M03 · ICON ▶ · square play tile ────────────────────────────────── */
+.rb03 {
+  width: 84px;
+  height: 84px;
+  background: var(--color-accent);
+  border-radius: 2px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.rb03 .glyph {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rb03 .tri {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 11px 0 11px 18px;
+  border-color: transparent transparent transparent #ffffff;
+  transition:
+    transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    opacity 120ms linear;
+}
+
+.rb03 .ticks {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 80ms linear;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.rb03 .ticks span {
+  display: inline-block;
+  transform: translateX(-6px);
+  opacity: 0;
+  transition:
+    transform 160ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    opacity 100ms linear;
+}
+
+.rb03:hover .tri {
+  transform: translateX(8px);
+  opacity: 0;
+}
+
+.rb03:hover .ticks {
+  opacity: 1;
+}
+
+.rb03:hover .ticks span {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.rb03:hover .ticks span:nth-child(1) {
+  transition-delay: 0ms;
+}
+.rb03:hover .ticks span:nth-child(2) {
+  transition-delay: 80ms;
+}
+.rb03:hover .ticks span:nth-child(3) {
+  transition-delay: 160ms;
+}
+
+/* Static variant — used when the resting icon isn't a "play" semantic
+ * (Footer social icons, BubbleMenu toggle). Keeps the 84×84 abyss tile
+ * but suppresses the chevron cascade. */
+.rb03Static .glyph {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── M04 · 01 / CONTINUE · index roll ───────────────────────────────── */
+.rb04 {
+  background: var(--color-accent);
+  padding: 22px 32px 22px 22px;
+  border-radius: 2px;
+  font-size: 13px;
+  letter-spacing: 0.26em;
+  font-weight: 500;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.rb04 .index {
+  display: inline-block;
+  width: 1.2ch;
+  height: 1em;
+  overflow: hidden;
+  position: relative;
+  border-left: 1px solid rgba(255, 255, 255, 0.35);
+  padding-left: 14px;
+  box-sizing: content-box;
+  font-family: var(--font-mono);
+}
+
+.rb04 .indexRoll {
+  display: block;
+  transform: translateY(0);
+  transition: transform 240ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.rb04 .indexRoll span {
+  display: block;
+  height: 1em;
+  line-height: 1em;
+}
+
+.rb04:hover .indexRoll {
+  transform: translateY(-1em);
+}
+
+.rb04 .lbl {
+  font-family: var(--font-mono);
+}
+
+/* ── M05 · LAUNCH · ghost on canvas, underline draw ─────────────────── */
+.rb05 {
+  background: transparent;
+  padding: 22px 4px 26px;
+  border-radius: 0;
+  font-family: var(--font-syne);
+  font-weight: 800;
+  font-size: 30px;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  min-width: 260px;
+}
+
+.rb05 .lbl {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+.rb05 .lbl::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: #ffffff;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.rb05:hover .lbl::after {
+  transform: scaleX(1);
+}
+
+/* ── M06 · DEPLOY · stacked editorial ───────────────────────────────── */
+.rb06 {
+  background: var(--color-accent);
+  padding: 24px 28px;
+  border-radius: 2px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 220px;
+  line-height: 1;
+}
+
+.rb06 .top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.rb06 .top .year {
+  display: inline-block;
+  width: 5ch;
+  height: 1em;
+  overflow: hidden;
+  position: relative;
+  letter-spacing: 0;
+}
+
+.rb06 .yearRoll {
+  display: block;
+  transform: translateY(0);
+  transition: transform 280ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.rb06 .yearRoll span {
+  display: block;
+  height: 1em;
+  line-height: 1em;
+  color: #ffffff;
+}
+
+.rb06:hover .yearRoll {
+  transform: translateY(-1em);
+}
+
+.rb06 .big {
+  font-family: var(--font-syne);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.02em;
+}

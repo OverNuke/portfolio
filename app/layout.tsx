@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Playfair_Display } from "next/font/google";
+import { Playfair_Display, Syne } from "next/font/google";
 import "./globals.css";
 import BubbleMenu from "./_components/ui/BubbleMenu";
 import { Footer } from "./_components/layout/Footer";
@@ -23,6 +23,13 @@ const gcProp = localFont({
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
+  display: "swap",
+});
+
+const syne = Syne({
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-syne",
   display: "swap",
 });
 
@@ -57,6 +64,7 @@ export default function RootLayout({
         gcMono.variable,
         gcProp.variable,
         playfair.variable,
+        syne.variable,
         kohinoorZerone.variable,
       )}
     >

@@ -6,22 +6,6 @@ import type { CSSProperties, ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import styles from "./BubbleMenu.module.css";
 
-const PIXEL_STEP = 4;
-const TOGGLE_CLIP_PATH = `polygon(
-  0 ${PIXEL_STEP}px,
-  ${PIXEL_STEP}px ${PIXEL_STEP}px,
-  ${PIXEL_STEP}px 0,
-  calc(100% - ${PIXEL_STEP}px) 0,
-  calc(100% - ${PIXEL_STEP}px) ${PIXEL_STEP}px,
-  100% ${PIXEL_STEP}px,
-  100% calc(100% - ${PIXEL_STEP}px),
-  calc(100% - ${PIXEL_STEP}px) calc(100% - ${PIXEL_STEP}px),
-  calc(100% - ${PIXEL_STEP}px) 100%,
-  ${PIXEL_STEP}px 100%,
-  ${PIXEL_STEP}px calc(100% - ${PIXEL_STEP}px),
-  0 calc(100% - ${PIXEL_STEP}px)
-)`;
-
 type MenuItem = {
   label: string;
   href: string;
@@ -102,7 +86,6 @@ export default function BubbleMenu({
 }: BubbleMenuProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
-  const [isTogglePressed, setIsTogglePressed] = useState(false);
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const bubblesRef = useRef<HTMLAnchorElement[]>([]);
@@ -219,74 +202,43 @@ export default function BubbleMenu({
     return () => window.removeEventListener("resize", handleResize);
   }, [isMenuOpen, menuItems]);
 
-  // Retro pixel-button toggle: hard offset shadow + stepped corners
-  const togglePressOffset = isTogglePressed ? 0 : PIXEL_STEP;
+  // Retro M03-derived toggle: abyss square, 2px radius, no chevron cascade.
+  // Press: translateY(1px) via :active. Hamburger lines rotate into X on open.
   const toggleButton = (
-    <div
-      className="relative pointer-events-auto w-12 h-12 md:w-14 md:h-14"
+    <button
+      ref={toggleButtonRef}
+      type="button"
+      onClick={handleToggle}
+      aria-label={menuAriaLabel}
+      aria-expanded={isMenuOpen}
+      aria-controls="bubble-overlay"
+      className="pointer-events-auto inline-flex flex-col items-center justify-center border-0 cursor-pointer p-0 will-change-transform w-12 h-12 md:w-14 md:h-14 active:translate-y-px transition-transform"
       style={{
-        // Reserve room for the offset pixel shadow
-        paddingRight: PIXEL_STEP,
-        paddingBottom: PIXEL_STEP,
+        background: "var(--color-accent)",
+        borderRadius: 2,
+        WebkitTapHighlightColor: "transparent",
       }}
     >
-      <div
-        aria-hidden="true"
-        className="absolute"
+      <span
+        className={styles.menuLine}
         style={{
-          top: PIXEL_STEP,
-          left: PIXEL_STEP,
-          right: 0,
-          bottom: 0,
-          background: "#0B0B0B",
-          clipPath: TOGGLE_CLIP_PATH,
-          pointerEvents: "none",
+          width: 26,
+          height: 2,
+          background: menuContentColor,
+          transform: isMenuOpen ? "translateY(4px) rotate(45deg)" : "none",
         }}
       />
-      <button
-        ref={toggleButtonRef}
-        type="button"
-        onClick={handleToggle}
-        aria-label={menuAriaLabel}
-        aria-expanded={isMenuOpen}
-        aria-controls="bubble-overlay"
-        onMouseLeave={() => setIsTogglePressed(false)}
-        onMouseDown={() => setIsTogglePressed(true)}
-        onMouseUp={() => setIsTogglePressed(false)}
-        onTouchStart={() => setIsTogglePressed(true)}
-        onTouchEnd={() => setIsTogglePressed(false)}
-        className="absolute inline-flex flex-col items-center justify-center border-0 cursor-pointer p-0 will-change-transform"
+      <span
+        className={styles.menuLine}
         style={{
-          top: togglePressOffset,
-          left: togglePressOffset,
-          right: PIXEL_STEP - togglePressOffset,
-          bottom: PIXEL_STEP - togglePressOffset,
-          background: menuBg,
-          clipPath: TOGGLE_CLIP_PATH,
-          transition: "top 60ms steps(2), left 60ms steps(2)",
+          marginTop: "6px",
+          width: 26,
+          height: 2,
+          background: menuContentColor,
+          transform: isMenuOpen ? "translateY(-4px) rotate(-45deg)" : "none",
         }}
-      >
-        <span
-          className={styles.menuLine}
-          style={{
-            width: 26,
-            height: 2,
-            background: menuContentColor,
-            transform: isMenuOpen ? "translateY(4px) rotate(45deg)" : "none",
-          }}
-        />
-        <span
-          className={styles.menuLine}
-          style={{
-            marginTop: "6px",
-            width: 26,
-            height: 2,
-            background: menuContentColor,
-            transform: isMenuOpen ? "translateY(-4px) rotate(-45deg)" : "none",
-          }}
-        />
-      </button>
-    </div>
+      />
+    </button>
   );
 
   return (
