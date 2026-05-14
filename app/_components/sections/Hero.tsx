@@ -21,7 +21,11 @@ const PARAGRAPH =
 const SCROLL_TARGETS = [
   { id: "about", label: "ABOUT", aria: "View about me" },
   { id: "projects", label: "PROJECTS", aria: "View projects" },
-  { id: "certificates", label: "CERTIFICATES", aria: "View certificates and skills" },
+  {
+    id: "certificates",
+    label: "CERTIFICATES",
+    aria: "View certificates and skills",
+  },
   { id: "contact", label: "CONTACT", aria: "Contact me" },
 ] as const;
 
@@ -45,7 +49,6 @@ export function Hero() {
 
       <div className="max-w-6xl mx-auto px-6 sm:px-8 pt-0 pb-16 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-y-12 lg:gap-y-0 lg:gap-x-16 items-start">
-
           {/* LEFT — animated name */}
           <LayeredText
             lines={NAME_LINES}
@@ -57,9 +60,8 @@ export function Hero() {
 
           {/* RIGHT — role, paragraph, buttons */}
           <div className="flex flex-col">
-
             {/* Role label */}
-            <div className="mb-6 lg:mb-8 lg:border-l lg:border-foreground/15 lg:pl-6">
+            <div className="mb-1 lg:mb-9 lg:pl-6">
               <div className="flex items-center gap-3 mb-3" aria-hidden="true">
                 <motion.div
                   className="w-6 h-px bg-foreground/40 origin-left"
@@ -76,6 +78,7 @@ export function Hero() {
                   Role
                 </motion.span>
               </div>
+              <br />
               <motion.p
                 className="font-mono text-xs sm:text-sm tracking-wide text-foreground/80 leading-relaxed"
                 initial={prefersReducedMotion ? false : { opacity: 0 }}
@@ -90,14 +93,19 @@ export function Hero() {
             <div className="overflow-hidden mb-8 lg:mb-10">
               <motion.p
                 className="text-muted leading-relaxed text-[clamp(1rem,1vw+0.65rem,1.2rem)] max-w-2xl"
-                initial={prefersReducedMotion ? false : { clipPath: "inset(100% 0 0% 0)" }}
+                initial={
+                  prefersReducedMotion
+                    ? false
+                    : { clipPath: "inset(100% 0 0% 0)" }
+                }
                 animate={{ clipPath: "inset(0% 0 0% 0)" }}
                 transition={{ duration: 0.5, delay: 0.35, ease: SHARP }}
               >
                 {PARAGRAPH}
               </motion.p>
             </div>
-
+            <br />
+                
             {/* Buttons — two rows, second row offset for asymmetric composition */}
             <div className="flex flex-col gap-3">
               <div className="flex flex-wrap gap-3">
@@ -143,7 +151,6 @@ export function Hero() {
                 ))}
               </div>
             </div>
-
           </div>
         </div>
       </div>
