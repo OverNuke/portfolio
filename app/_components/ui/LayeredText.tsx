@@ -41,7 +41,7 @@ export function LayeredText({
   fontSizeMd = "36px",
   lineHeight = 96,
   lineHeightMd = 44,
-  staggerX = 14,
+  staggerX = 20,
   staggerXMd = 8,
   lineColors,
   animate = true,
@@ -107,7 +107,7 @@ export function LayeredText({
       ref={containerRef}
       onMouseEnter={animate ? handleMouseEnter : undefined}
       onMouseLeave={animate ? handleMouseLeave : undefined}
-      className={`w-fit font-sans font-black tracking-[-2px] uppercase antialiased${animate ? " cursor-pointer" : ""} text-foreground ${className}`}
+      className={`w-fit font-sans font-black tracking-[-1px] uppercase antialiased${animate ? " cursor-pointer" : ""} text-foreground ${className}`}
       style={
         {
           fontSize,

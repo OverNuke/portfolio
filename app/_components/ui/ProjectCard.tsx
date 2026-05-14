@@ -1,4 +1,4 @@
-import type { Project } from '@/app/_lib/types'
+import type { Project } from '@/types'
 
 export function ProjectCard({ title, subtitle, description, tags, href, repo }: Project) {
   return (

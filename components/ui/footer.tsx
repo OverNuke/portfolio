@@ -1,6 +1,6 @@
 import type React from "react";
 import Link from "next/link";
-import { RetroPlayTile } from "./retro-buttons";
+import { RetroPlayTile } from "./retro-buttons/play-tile";
 
 interface FooterProps {
   logo: React.ReactNode;

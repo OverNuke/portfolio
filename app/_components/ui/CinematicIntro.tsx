@@ -56,6 +56,7 @@ export function CinematicIntro() {
   const [active, setActive] = useState(true);
   const [beat, setBeat] = useState(0);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
 
   const dismiss = useCallback(() => {
     tlRef.current?.kill();
@@ -64,6 +65,8 @@ export function CinematicIntro() {
     try {
       sessionStorage.setItem(STORAGE_KEY, "1");
     } catch {}
+    const target = document.getElementById("main-content");
+    (target ?? document.body).focus?.();
   }, []);
 
   useEffect(() => {
@@ -83,10 +86,7 @@ export function CinematicIntro() {
     const tl = gsap.timeline({
       onComplete: () => {
         document.documentElement.style.overflow = prevOverflow;
-        setActive(false);
-        try {
-          sessionStorage.setItem(STORAGE_KEY, "1");
-        } catch {}
+        dismiss();
       },
     });
 
@@ -102,12 +102,14 @@ export function CinematicIntro() {
       tl.kill();
       document.documentElement.style.overflow = prevOverflow;
     };
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, dismiss]);
 
-  // Skip on click or keypress.
+  // Park focus on the overlay and handle keyboard interactions while active.
   useEffect(() => {
     if (!active) return;
+    overlayRef.current?.focus();
     const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Tab") { e.preventDefault(); return; }
       if (e.key === "Escape" || e.key === "Enter" || e.key === " ") dismiss();
     };
     window.addEventListener("keydown", onKey);
@@ -121,12 +123,14 @@ export function CinematicIntro() {
       {active && (
         <motion.div
           key="intro"
+          ref={overlayRef}
+          tabIndex={-1}
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           onClick={dismiss}
           role="presentation"
-          className="fixed inset-0 z-9999 flex items-center justify-center bg-canvas text-foreground cursor-pointer select-none"
+          className="fixed inset-0 z-9999 flex items-center justify-center bg-canvas text-foreground cursor-pointer select-none outline-none"
         >
           <CornerMarks beat={current.tag} total={BEATS.length} />
 

@@ -18,7 +18,7 @@ Open [http://localhost:3000](http://localhost:3000). The page hot-reloads as you
 **Start here.** All your personal content lives in one file:
 
 ```
-app/_lib/data.ts
+lib/data.ts
 ```
 
 Open it and replace the placeholder entries with your real projects, certificates, and skills. The components read from this file automatically — you never touch the components themselves just to update content.
@@ -26,7 +26,7 @@ Open it and replace the placeholder entries with your real projects, certificate
 ### Adding a project
 
 ```ts
-// app/_lib/data.ts
+// lib/data.ts
 export const PROJECTS: Project[] = [
   {
     title: 'My Project',
@@ -226,7 +226,7 @@ The **only** component in this project that is a Client Component is `Navbar.tsx
 ### Why `@/` in imports
 
 ```ts
-import { PROJECTS } from '@/app/_lib/data'
+import { PROJECTS } from '@/lib/data'
 ```
 
 The `@/` is an alias for the project root, configured in `tsconfig.json`. It avoids long relative paths like `../../../_lib/data`.

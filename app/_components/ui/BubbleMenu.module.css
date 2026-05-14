@@ -29,7 +29,8 @@
   .pillLink {
     transform: rotate(var(--item-rot));
   }
-  .pillLink:hover {
+  .pillLink:hover,
+  .pillLink:focus-visible {
     transform: rotate(var(--item-rot)) scale(1.06);
     background: var(--hover-bg) !important;
     color: var(--hover-color) !important;
@@ -57,7 +58,8 @@
     padding: clamp(1rem, 2vw, 2rem) 0;
     min-height: 80px !important;
   }
-  .pillLink:hover {
+  .pillLink:hover,
+  .pillLink:focus-visible {
     transform: scale(1.06);
     background: var(--hover-bg) !important;
     color: var(--hover-color) !important;

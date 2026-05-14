@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState, useRef, useEffect } from "react"
 import { ArrowUpRight } from "lucide-react"
-import { PROJECTS } from "@/app/_lib/data"
+import { PROJECTS } from "@/lib/data"
 
 const featured = PROJECTS.filter((p) => p.featured)
 const showcaseProjects = featured.length > 0 ? featured : PROJECTS
@@ -63,6 +63,7 @@ export function ProjectShowcase() {
 
       {showcaseProjects.some((p) => p.image) && (
         <div
+          aria-hidden="true"
           className="pointer-events-none fixed z-50 overflow-hidden rounded-xl shadow-2xl"
           style={{
             left: 0,
@@ -103,6 +104,8 @@ export function ProjectShowcase() {
             className="group block"
             onMouseEnter={() => handleMouseEnter(index)}
             onMouseLeave={handleMouseLeave}
+            onFocus={() => handleMouseEnter(index)}
+            onBlur={handleMouseLeave}
           >
             <div className="relative py-5 border-t border-border transition-all duration-300 ease-out">
               <div

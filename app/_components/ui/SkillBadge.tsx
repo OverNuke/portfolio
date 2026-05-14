@@ -1,4 +1,4 @@
-import type { Skill } from '@/app/_lib/types'
+import type { Skill } from '@/types'
 
 export function SkillBadge({ name }: Pick<Skill, 'name'>) {
   return (

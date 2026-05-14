@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import type { Certificate, CertificateCategory } from '@/app/_lib/types'
+import type { Certificate, CertificateCategory } from '@/types'
 import styles from './CertificateBento.module.css'
 
 const catClass: Record<CertificateCategory, string> = {
@@ -61,6 +61,8 @@ export function CertificateBento({ certificates, showOpenSlot = false }: Props) 
     rel: 'noopener noreferrer',
     onMouseEnter: () => setHovered(c),
     onMouseLeave: () => setHovered(null),
+    onFocus: () => setHovered(c),
+    onBlur: () => setHovered(null),
     'aria-label': `View certificate: ${c.title}`,
   })
 

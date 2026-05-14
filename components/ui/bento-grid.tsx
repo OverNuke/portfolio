@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react"
 import { Globe } from "lucide-react"
-import type { Certificate } from "@/app/_lib/types"
+import type { Certificate } from "@/types"
 import TypeTester from "./bento-widgets/type-tester"
 import LayoutAnimation from "./bento-widgets/layout-animation"
 import GlobalNetwork from "./bento-widgets/global-network"
