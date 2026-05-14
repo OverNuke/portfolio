@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState, useRef, useEffect } from "react"
 import { ArrowUpRight } from "lucide-react"
-import { PROJECTS } from "@/app/_lib/data"
+import { PROJECTS } from "@/lib/data"
 
 const featured = PROJECTS.filter((p) => p.featured)
 const showcaseProjects = featured.length > 0 ? featured : PROJECTS

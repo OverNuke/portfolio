@@ -1,7 +1,8 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { RetroContinue, RetroEnter } from "@/components/ui/retro-buttons";
+import { RetroContinue } from "@/components/ui/retro-buttons/continue-button";
+import { RetroEnter } from "@/components/ui/retro-buttons/enter";
 import { LayeredText } from "../ui/LayeredText";
 
 const NAME_LINES = [
