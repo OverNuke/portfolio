@@ -1,4 +1,4 @@
-import { CERTIFICATES } from '@/app/_lib/data'
+import { CERTIFICATES } from '@/lib/data'
 import { SectionHeading } from '../ui/SectionHeading'
 import { CertificateBento } from '../ui/CertificateBento'
 

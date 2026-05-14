@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import type { Certificate, CertificateCategory } from '@/app/_lib/types'
+import type { Certificate, CertificateCategory } from '@/types'
 import styles from './CertificateBento.module.css'
 
 const catClass: Record<CertificateCategory, string> = {

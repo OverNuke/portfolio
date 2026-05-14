@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
 import { Caveat } from "next/font/google";
-import { PROJECTS } from "@/app/_lib/data";
+import { PROJECTS } from "@/lib/data";
+import { useProjectPreviewAnimation } from "@/hooks/useProjectPreviewAnimation";
 
 const caveat = Caveat({ subsets: ["latin"], weight: ["400", "500"] });
 
@@ -46,36 +46,9 @@ const CARD_LAYOUTS: CardLayout[] = [
 ];
 
 export function ProjectsGrid() {
-  const [activeIdx, setActiveIdx] = useState<number | null>(null);
-  const previewRef = useRef<HTMLDivElement>(null);
-  const targetRef = useRef({ x: 0, y: 0 });
-  const posRef = useRef({ x: 0, y: 0 });
-  const rafRef = useRef<number | null>(null);
-
-  // Direct DOM update for cursor lerp to avoid re-renders per frame
-  useEffect(() => {
-    const lerp = (a: number, b: number, f: number) => a + (b - a) * f;
-    const tick = () => {
-      posRef.current.x = lerp(posRef.current.x, targetRef.current.x, 0.15);
-      posRef.current.y = lerp(posRef.current.y, targetRef.current.y, 0.15);
-      if (previewRef.current) {
-        previewRef.current.style.transform = `translate3d(${posRef.current.x + 24}px, ${posRef.current.y - 120}px, 0)`;
-      }
-      rafRef.current = requestAnimationFrame(tick);
-    };
-    rafRef.current = requestAnimationFrame(tick);
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
-
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      targetRef.current = { x: e.clientX, y: e.clientY };
-    };
-    window.addEventListener("mousemove", onMove, { passive: true });
-    return () => window.removeEventListener("mousemove", onMove);
-  }, []);
+  const { activeIdx, previewRef, cardHandlers } = useProjectPreviewAnimation(
+    PROJECTS.slice(0, 4).length,
+  );
 
   const projects = PROJECTS.slice(0, 4);
 
@@ -262,8 +235,7 @@ export function ProjectsGrid() {
                       "border-color .25s ease, background-color .25s ease, transform .35s cubic-bezier(.2,.7,.2,1)",
                     display: "flex",
                   }}
-                  onMouseEnter={() => setActiveIdx(i)}
-                  onMouseLeave={() => setActiveIdx(null)}
+                  {...cardHandlers(i)}
                 >
                   {/* Paper-edge double border on c2 (break-out) */}
                   {layout.hasOuterBorder && (
