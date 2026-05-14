@@ -76,18 +76,10 @@ export function Hero() {
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.15, delay: 0.2 }}
                 >
-                  Role
+                  An alien among humans beings who codes.
                 </motion.span>
               </div>
               <br />
-              <motion.p
-                className="font-mono text-xs sm:text-sm tracking-wide text-foreground/80 leading-relaxed"
-                initial={prefersReducedMotion ? false : { opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.15, delay: 0.3 }}
-              >
-                An alien among humans beings who codes.
-              </motion.p>
             </div>
 
             {/* Paragraph — clip-path reveal, no word-by-word */}

@@ -1,7 +1,10 @@
-/* Retro Game Buttons — Mark 01 to 06
+/* Retro Game Buttons — Mark 01 to 12
  * Transcribed from Claude Design bundle "Retro Game Buttons.html".
  * CSS vars map directly to the project's existing palette tokens, so
  * --color-accent === design's --abyss, --color-foreground === --silver, etc.
+ * Marks 07–12 are the icon-capable variants. Any <svg> placed inside an
+ * .rb button inherits the minimalist 1.5-stroke white styling automatically;
+ * each mark's slot wrapper sets the size (18 / 22 / 28 px).
  */
 
 .rb {
@@ -329,4 +332,314 @@
   font-weight: 700;
   font-size: 26px;
   letter-spacing: 0.02em;
+}
+
+/* ============================================================
+ * ICON BASE — applies to any <svg> placed inside an .rb button.
+ * Per-mark slot wrappers below set the size (18 / 22 / 28 px).
+ * ============================================================ */
+.rb svg {
+  display: block;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  color: #ffffff;
+}
+
+/* ── M07 · ICON + TEXT · slab, icon-left ────────────────────────────── */
+.rb07 {
+  background: var(--color-accent);
+  padding: 22px 36px;
+  border-radius: 2px;
+  font-size: 13px;
+  letter-spacing: 0.28em;
+  font-weight: 500;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.rb07 .icoWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(0);
+  transition: transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.rb07 .icoWrap svg {
+  width: 18px;
+  height: 18px;
+}
+
+.rb07:hover .icoWrap {
+  transform: translateX(6px);
+}
+
+.rb07 .lbl {
+  display: inline-block;
+}
+
+/* ── M08 · TEXT + ICON · ghost outline, swap window ─────────────────── */
+.rb08 {
+  background: transparent;
+  border: 1px solid var(--color-foreground);
+  padding: 20px 28px;
+  border-radius: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  font-weight: 500;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+  min-width: 240px;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.rb08 .icoTrack {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.rb08 .icoTrack .slot {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.rb08 .icoTrack .slot svg {
+  width: 18px;
+  height: 18px;
+}
+
+.rb08 .icoTrack .out {
+  transform: translateX(0);
+}
+
+.rb08 .icoTrack .in {
+  transform: translateX(-26px);
+}
+
+.rb08:hover .icoTrack .out {
+  transform: translateX(26px);
+}
+
+.rb08:hover .icoTrack .in {
+  transform: translateX(0);
+}
+
+/* ── M09 · ICON SQUARE · ticker swap ────────────────────────────────── */
+.rb09 {
+  width: 72px;
+  height: 72px;
+  background: var(--color-accent);
+  border-radius: 2px;
+  padding: 0;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+
+.rb09 .col {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  transform: translateY(0);
+  transition: transform 260ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.rb09 .slot {
+  width: 100%;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 72px;
+}
+
+.rb09 .slot svg {
+  width: 22px;
+  height: 22px;
+}
+
+.rb09:hover .col {
+  transform: translateY(-72px);
+}
+
+/* ── M10 · ICON | TEXT · control-panel divider ──────────────────────── */
+.rb10 {
+  background: var(--color-accent);
+  border-radius: 2px;
+  padding: 0;
+  display: inline-flex;
+  align-items: stretch;
+  line-height: 1;
+  overflow: hidden;
+}
+
+.rb10 .cellI,
+.rb10 .cellT {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 22px;
+}
+
+.rb10 .cellI {
+  border-right: 1px solid rgba(255, 255, 255, 0.22);
+  transition: transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.rb10 .cellI svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.rb10 .cellT {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  font-weight: 500;
+  padding-right: 28px;
+}
+
+.rb10:hover .cellI svg {
+  transform: translateX(2px) translateY(-2px);
+}
+
+/* ── M11 · ICON STACK · centered editorial mini ─────────────────────── */
+.rb11 {
+  background: transparent;
+  border: 1px solid var(--color-foreground);
+  border-radius: 0;
+  padding: 22px 28px 18px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  line-height: 1;
+  min-width: 160px;
+}
+
+.rb11 .icoPad {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.rb11 .icoPad svg {
+  width: 28px;
+  height: 28px;
+}
+
+.rb11:hover .icoPad {
+  transform: translateY(-3px);
+}
+
+.rb11 .lbl {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  font-weight: 500;
+}
+
+.rb11 .rule {
+  width: 0;
+  height: 1px;
+  background: #ffffff;
+  transition: width 280ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.rb11:hover .rule {
+  width: 100%;
+}
+
+/* ── M12 · ICON · ghost square w/ corner crop marks ─────────────────── */
+.rb12 {
+  width: 72px;
+  height: 72px;
+  background: transparent;
+  border: 1px solid var(--color-foreground);
+  border-radius: 0;
+  padding: 0;
+  position: relative;
+  overflow: visible;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rb12 svg {
+  width: 22px;
+  height: 22px;
+  transition: transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.rb12:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.rb12 .tick {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  opacity: 0;
+  transition:
+    opacity 100ms linear,
+    transform 200ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.rb12 .tl {
+  top: -5px;
+  left: -5px;
+  border-top: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  transform: translate(4px, 4px);
+}
+
+.rb12 .tr {
+  top: -5px;
+  right: -5px;
+  border-top: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
+  transform: translate(-4px, 4px);
+}
+
+.rb12 .bl {
+  bottom: -5px;
+  left: -5px;
+  border-bottom: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  transform: translate(4px, -4px);
+}
+
+.rb12 .br {
+  bottom: -5px;
+  right: -5px;
+  border-bottom: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
+  transform: translate(-4px, -4px);
+}
+
+.rb12:hover .tick {
+  opacity: 1;
+  transform: translate(0, 0);
 }
