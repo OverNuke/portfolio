@@ -43,3 +43,4 @@ general.py
 
 # agent tooling
 .atl/
+.claude/

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { RetroEnter } from "@/components/ui/retro-buttons";
+import { RetroContinue, RetroEnter } from "@/components/ui/retro-buttons";
 import { LayeredText } from "../ui/LayeredText";
 
 const NAME_LINES = [
@@ -105,7 +105,7 @@ export function Hero() {
               </motion.p>
             </div>
             <br />
-                
+
             {/* Buttons — two rows, second row offset for asymmetric composition */}
             <div className="flex flex-col gap-3">
               <div className="flex flex-wrap gap-3">
@@ -137,7 +137,7 @@ export function Hero() {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.12, delay: 0.69 + i * 0.07 }}
                   >
-                    <RetroEnter
+                    <RetroContinue
                       label={t.label}
                       aria-label={t.aria}
                       onClick={() =>
@@ -145,7 +145,8 @@ export function Hero() {
                           .getElementById(t.id)
                           ?.scrollIntoView({ behavior: "smooth" })
                       }
-                      minWidth={200}
+                      indexFrom="00"
+                      indexTo="10"
                     />
                   </motion.div>
                 ))}

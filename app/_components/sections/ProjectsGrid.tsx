@@ -77,18 +77,6 @@ export function ProjectsGrid() {
     return () => window.removeEventListener("mousemove", onMove);
   }, []);
 
-  const handleCardClick = (href: string, e: React.MouseEvent) => {
-    if ((e.target as Element).closest("a")) return;
-    if (href && href !== "#") window.location.href = href;
-  };
-
-  const handleCardKey = (href: string, e: React.KeyboardEvent) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      if (href && href !== "#") window.location.href = href;
-    }
-  };
-
   const projects = PROJECTS.slice(0, 4);
 
   return (
@@ -259,104 +247,111 @@ export function ProjectsGrid() {
             return (
               <div
                 key={project.title}
-                className={`col-span-full ${layout.colClass} ${layout.transformClass} relative flex flex-col min-h-[340px] border border-[#1d2645] cursor-pointer transition-[border-color,background-color] duration-250`}
-                style={{
-                  background:
-                    "linear-gradient(180deg, rgba(18,24,46,0.55) 0%, rgba(11,11,11,0.6) 100%)",
-                  padding: "28px 28px 24px",
-                  transition:
-                    "border-color .25s ease, background-color .25s ease, transform .35s cubic-bezier(.2,.7,.2,1)",
-                }}
-                role="link"
-                tabIndex={0}
-                aria-label={`Open ${project.title} case study`}
-                onClick={(e) => handleCardClick(project.href, e)}
-                onKeyDown={(e) => handleCardKey(project.href, e)}
-                onMouseEnter={() => setActiveIdx(i)}
-                onMouseLeave={() => setActiveIdx(null)}
+                className={`col-span-full ${layout.colClass} ${layout.transformClass} relative`}
               >
-                {/* Paper-edge double border on c2 (break-out) */}
-                {layout.hasOuterBorder && (
-                  <div
-                    className="hidden xl:block absolute pointer-events-none border border-[#14192e]"
-                    style={{ inset: "-6px" }}
-                    aria-hidden="true"
-                  />
-                )}
-
-                {/* Inner dashed inset border on c4 */}
-                {layout.hasInnerBorder && (
-                  <div
-                    className="absolute inset-1 border border-dashed pointer-events-none"
-                    style={{ borderColor: "rgba(228,228,228,0.06)" }}
-                    aria-hidden="true"
-                  />
-                )}
-
-                {/* Museum plaque header */}
-                <div className="flex justify-between items-start gap-4 mb-[22px] pb-4 border-b border-[#1d2645]">
-                  <div className="font-mono text-[11px] text-muted tracking-[0.16em] leading-[1.7]">
-                    <div>
-                      <span className="text-foreground font-medium">
-                        Nº {String(i + 1).padStart(2, "0")}
-                      </span>
-                    </div>
-                    <div>{layout.plaqueLabel}</div>
-                  </div>
-                  <div
-                    className="font-mono text-[10.5px] text-right leading-[1.7] tracking-[0.1em]"
-                    style={{ color: "#5a5a5a" }}
-                  >
-                    {project.year ?? "—"}
-                    <br />
-                    {project.medium ?? "—"}
-                  </div>
-                </div>
-
-                {/* Project title */}
-                <h3
-                  className="font-sans font-medium text-foreground leading-[1.02] tracking-[-0.024em] mb-[14px] transition-[letter-spacing] duration-250"
-                  style={{ fontSize: "clamp(28px, 2.6vw, 38px)" }}
+                {/* Card body — native anchor for full keyboard + semantic link support */}
+                <a
+                  href={project.href}
+                  aria-label={`Open ${project.title} case study`}
+                  className="relative flex flex-col min-h-[340px] border border-[#1d2645] no-underline text-inherit transition-[border-color,background-color] duration-250"
+                  style={{
+                    background:
+                      "linear-gradient(180deg, rgba(18,24,46,0.55) 0%, rgba(11,11,11,0.6) 100%)",
+                    padding: "28px 28px 24px",
+                    transition:
+                      "border-color .25s ease, background-color .25s ease, transform .35s cubic-bezier(.2,.7,.2,1)",
+                    display: "flex",
+                  }}
+                  onMouseEnter={() => setActiveIdx(i)}
+                  onMouseLeave={() => setActiveIdx(null)}
                 >
-                  {project.title}
-                </h3>
-
-                {/* Description */}
-                <p className="font-mono text-[12.5px] leading-[1.6] text-muted max-w-[46ch] mb-auto pb-6">
-                  {project.description}
-                </p>
-
-                {/* Footer: tags + github link */}
-                <div className="flex justify-between items-end gap-4 border-t border-dashed border-[#1d2645] pt-4">
-                  <ul
-                    className="flex flex-wrap gap-[6px] list-none"
-                    style={{ maxWidth: "70%" }}
-                  >
-                    {project.tags.map((tag) => (
-                      <li
-                        key={tag}
-                        className="font-mono text-[10.5px] tracking-[0.06em] text-muted px-2 py-1 border border-[#1d2645] lowercase leading-none"
-                      >
-                        {tag}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {project.repo && project.repo !== "#" && (
-                    <a
-                      href={project.repo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-mono text-[11px] text-muted no-underline tracking-[0.08em] border-b border-transparent whitespace-nowrap pb-0.5 transition-[color,border-color] duration-200 hover:text-foreground hover:border-foreground"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <span style={{ color: "#5a5a5a", marginRight: "6px" }}>
-                        [ ]
-                      </span>
-                      github&nbsp;→
-                    </a>
+                  {/* Paper-edge double border on c2 (break-out) */}
+                  {layout.hasOuterBorder && (
+                    <div
+                      className="hidden xl:block absolute pointer-events-none border border-[#14192e]"
+                      style={{ inset: "-6px" }}
+                      aria-hidden="true"
+                    />
                   )}
-                </div>
+
+                  {/* Inner dashed inset border on c4 */}
+                  {layout.hasInnerBorder && (
+                    <div
+                      className="absolute inset-1 border border-dashed pointer-events-none"
+                      style={{ borderColor: "rgba(228,228,228,0.06)" }}
+                      aria-hidden="true"
+                    />
+                  )}
+
+                  {/* Museum plaque header */}
+                  <div className="flex justify-between items-start gap-4 mb-[22px] pb-4 border-b border-[#1d2645]">
+                    <div className="font-mono text-[11px] text-muted tracking-[0.16em] leading-[1.7]">
+                      <div>
+                        <span className="text-foreground font-medium">
+                          Nº {String(i + 1).padStart(2, "0")}
+                        </span>
+                      </div>
+                      <div>{layout.plaqueLabel}</div>
+                    </div>
+                    <div
+                      className="font-mono text-[10.5px] text-right leading-[1.7] tracking-[0.1em]"
+                      style={{ color: "#5a5a5a" }}
+                    >
+                      {project.year ?? "—"}
+                      <br />
+                      {project.medium ?? "—"}
+                    </div>
+                  </div>
+
+                  {/* Project title */}
+                  <h3
+                    className="font-sans font-medium text-foreground leading-[1.02] tracking-[-0.024em] mb-[14px] transition-[letter-spacing] duration-250"
+                    style={{ fontSize: "clamp(28px, 2.6vw, 38px)" }}
+                  >
+                    {project.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="font-mono text-[12.5px] leading-[1.6] text-muted max-w-[46ch] mb-auto pb-6">
+                    {project.description}
+                  </p>
+
+                  {/* Footer: tags row (github link moved outside as sibling) */}
+                  <div className="flex justify-between items-end gap-4 border-t border-dashed border-[#1d2645] pt-4">
+                    <ul
+                      className="flex flex-wrap gap-[6px] list-none"
+                      style={{ maxWidth: "70%" }}
+                    >
+                      {project.tags.map((tag) => (
+                        <li
+                          key={tag}
+                          className="font-mono text-[10.5px] tracking-[0.06em] text-muted px-2 py-1 border border-[#1d2645] lowercase leading-none"
+                        >
+                          {tag}
+                        </li>
+                      ))}
+                    </ul>
+                    {/* Spacer so footer row keeps its layout even without github link */}
+                    <span aria-hidden="true" />
+                  </div>
+                </a>
+
+                {/* GitHub link — sibling to card anchor to avoid nested <a> */}
+                {project.repo && project.repo !== "#" && (
+                  <a
+                    href={project.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`View ${project.title} on GitHub`}
+                    className="absolute bottom-[28px] right-[28px] font-mono text-[11px] text-muted no-underline tracking-[0.08em] border-b border-transparent whitespace-nowrap pb-0.5 transition-[color,border-color] duration-200 hover:text-foreground hover:border-foreground z-10"
+                    style={{ lineHeight: "1" }}
+                  >
+                    <span style={{ color: "#5a5a5a", marginRight: "6px" }}>
+                      [ ]
+                    </span>
+                    github&nbsp;→
+                  </a>
+                )}
               </div>
             );
           })}
