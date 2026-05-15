@@ -12,16 +12,17 @@ export interface Project {
 }
 
 export type CertificateCategory = 'academic' | 'language' | 'honors'
-export type CertificateShape = 'hero' | 'circle' | 'pill' | 'strip' | 'portrait'
+export type CertificatePixelIcon = 'trophy' | 'crown' | 'globe' | 'scroll'
 
 export interface Certificate {
+  id: string
   title: string
   issuer: string
   date: string
-  href?: string
+  href: string
   category: CertificateCategory
-  shape: CertificateShape
-  ext?: 'PDF' | 'JPG' | 'PNG'
+  icon: CertificatePixelIcon
+  hero?: boolean
 }
 
 export interface Skill {
