@@ -1,0 +1,97 @@
+/* Scoped styles for the Projects section.
+ * Only effects that need real CSS live here:
+ *   - infinite marquee animation
+ *   - retro-button square hover ticks (positioned pseudo-corners)
+ * Everything else is Tailwind in the JSX. */
+
+.marqueeStrip {
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.marqueeTrack {
+  display: inline-block;
+  animation: marquee 38s linear infinite;
+  will-change: transform;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marqueeTrack { animation: none; }
+}
+
+/* Retro square link — four hover ticks that pop out from the corners. */
+.retroSquare {
+  position: relative;
+  overflow: visible;
+}
+.retroSquare::before,
+.retroSquare::after,
+.retroSquare > .tickBL,
+.retroSquare > .tickBR {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  opacity: 0;
+  transition: opacity 100ms linear, transform 200ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  pointer-events: none;
+}
+.retroSquare::before {
+  top: -4px; left: -4px;
+  border-top: 1px solid currentColor;
+  border-left: 1px solid currentColor;
+  transform: translate(3px, 3px);
+}
+.retroSquare::after {
+  top: -4px; right: -4px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: translate(-3px, 3px);
+}
+.tickBL,
+.tickBR {
+  display: block;
+}
+.retroSquare > .tickBL {
+  bottom: -4px; left: -4px;
+  border-bottom: 1px solid currentColor;
+  border-left: 1px solid currentColor;
+  transform: translate(3px, -3px);
+}
+.retroSquare > .tickBR {
+  bottom: -4px; right: -4px;
+  border-bottom: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: translate(-3px, -3px);
+}
+.retroSquare:hover::before,
+.retroSquare:hover::after,
+.retroSquare:hover > .tickBL,
+.retroSquare:hover > .tickBR,
+.retroSquare:focus-visible::before,
+.retroSquare:focus-visible::after,
+.retroSquare:focus-visible > .tickBL,
+.retroSquare:focus-visible > .tickBR {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Thumbnail interactions: scale the inner pattern on parent hover. */
+.thumbInner {
+  transition: transform 540ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.thumbHost:hover .thumbInner,
+.thumbHost:focus-within .thumbInner {
+  transform: scale(1.05);
+}
+.thumbHostTile:hover .thumbInner,
+.thumbHostTile:focus-within .thumbInner {
+  transform: scale(1.08);
+}
