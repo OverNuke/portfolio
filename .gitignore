@@ -43,4 +43,8 @@ general.py
 
 # agent tooling
 .atl/
-.claude/
+.claude/SDD/
+.claude/worktrees/
+.claude/agents/
+.claude/agent-tools/
+.claude/agent-logs/
