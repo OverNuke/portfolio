@@ -96,8 +96,7 @@ export default function BubbleMenu({
 
   const containerCls = [
     useFixedPosition ? "fixed" : "absolute",
-    "left-4 right-4 top-8",
-    "px-5 sm:px-6 md:px-8",
+    "left-0 right-0 top-8",
     "pointer-events-none",
     "z-[1001]",
     className,
@@ -251,7 +250,7 @@ export default function BubbleMenu({
       </a>
 
       <nav className={containerCls} style={style} aria-label="Main navigation">
-        <div className="mx-auto flex w-full max-w-[80rem] items-center justify-between gap-4">
+        <div className="container-content flex items-center justify-between gap-4">
           <a
             href="#"
             className="inline-flex items-center justify-center rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.3)] pointer-events-auto h-12 md:h-14 pl-6 pr-5 sm:pl-7 sm:pr-6 md:pl-10 md:pr-9 will-change-transform no-underline"
