@@ -34,7 +34,7 @@ export function Navbar() {
         }`}
       >
         <nav
-          className="max-w-6xl mx-auto px-6 sm:px-8 h-16 flex items-center justify-between"
+          className="container-content h-16 flex items-center justify-between"
           aria-label="Main navigation"
         >
          
@@ -66,7 +66,7 @@ export function Navbar() {
         {isOpen && (
           <div id="mobile-menu" className="sm:hidden border-t border-edge">
             <ul
-              className="max-w-6xl mx-auto px-6 sm:px-8 py-6 flex flex-col gap-5"
+              className="container-content py-6 flex flex-col gap-5"
               role="list"
             >
               {NAV_LINKS.map(({ href, label }) => (
