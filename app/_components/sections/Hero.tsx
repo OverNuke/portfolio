@@ -49,7 +49,7 @@ export function Hero() {
       </h1>
 
       <div className="container-content pt-0 pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-y-12 lg:gap-y-0 lg:gap-x-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-12 lg:gap-y-0 lg:gap-x-16 items-start">
           {/* LEFT — animated name */}
           <LayeredText
             lines={NAME_LINES}
@@ -62,7 +62,7 @@ export function Hero() {
           {/* RIGHT — role, paragraph, buttons */}
           <div className="flex flex-col gap-content">
             {/* Role label */}
-            <div className="lg:pl-6">
+            <div>
               <div className="flex items-center gap-3 mb-3" aria-hidden="true">
                 <motion.div
                   className="w-6 h-px bg-foreground/40 origin-left"

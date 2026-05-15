@@ -66,6 +66,7 @@ All interactive elements MUST:
 ## Motion and Animation
 
 Animations MUST:
+
 - Respect prefers-reduced-motion
 - Avoid excessive movement
 - Never block interaction
