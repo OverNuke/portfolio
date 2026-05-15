@@ -39,6 +39,10 @@
   --spacing-heading: 4rem;
   --spacing-content: 1.5rem;
   --spacing-gutter: 1.5rem;
+  /* Navbar offset — pushes Hero content below fixed top navigation */
+  --spacing-navbar-offset: 4rem;
+  /* Container max-width — matches max-w-6xl (72rem) */
+  --container-6xl: 72rem;
 }
 
 *,
@@ -54,6 +58,7 @@ html {
   background-color: var(--color-canvas);
   color: var(--color-foreground);
   color-scheme: dark;
+  overflow-x: clip;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -76,7 +81,6 @@ html {
 }
 
 body {
-  margin: 1rem;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   min-height: 100dvh;
@@ -121,6 +125,17 @@ body {
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@utility container-content {
+  width: 100%;
+  max-width: var(--container-6xl);
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+
+  @media (min-width: 40rem) {
+    padding-inline: 2rem;
+  }
 }
 
 :root,

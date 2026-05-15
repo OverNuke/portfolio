@@ -6,7 +6,7 @@ interface SectionHeadingProps {
 
 export function SectionHeading({ children, label, id }: SectionHeadingProps) {
   return (
-    <header className="relative mb-10 sm:mb-heading isolate">
+    <header className="relative mb-heading isolate">
       {label && (
         <span
           aria-hidden="true"

@@ -252,6 +252,7 @@
   letter-spacing: 0.14em;
   line-height: 1;
   min-width: 260px;
+  justify-content: flex-start;
 }
 
 .rb05 .lbl {

@@ -34,32 +34,33 @@ export function Footer({
 }: FooterProps) {
   return (
     <footer className="pb-6 pt-16 lg:pb-8 lg:pt-24">
-      <div className="px-4 lg:px-8">
-        <div className="md:flex md:items-center md:justify-between">
+      <div className="container-content">
+        {socialLinks.length > 0 && (
+          <div className="md:flex md:items-center md:justify-between">
+            <ul className="flex list-none mt-6 md:mt-0 gap-x-2">
+              {socialLinks.map((link, i) => (
+                <li key={i}>
+                  <RetroPlayTile
+                    aria-label={link.label}
+                    onClick={() => window.open(link.href, "_blank", "noopener")}
+                    icon={link.icon}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        <div className="border-t border-edge mt-6 pt-8 md:mt-8 md:pt-10 flex items-center justify-between flex-wrap gap-4">
           <Link
             href="/"
-            className="flex items-center gap-x-3"
+            className="flex items-center gap-x-3 shrink-0"
             aria-label={brandName}
           >
             {logo}
-            <span className="font-bold text-xl">{brandName}</span>
+            <span className="text-sm text-muted-foreground">{brandName}</span>
           </Link>
-          <ul className="flex list-none mt-6 md:mt-0 gap-x-2">
-            {socialLinks.map((link, i) => (
-              <li key={i}>
-                <RetroPlayTile
-                  aria-label={link.label}
-                  onClick={() => window.open(link.href, "_blank", "noopener")}
-                  icon={link.icon}
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="h-1" />
-        <div className="border-t mt-6 pt-8 md:mt-8 md:pt-10 lg:grid lg:grid-cols-10 gap-y-6">
-          <nav className="lg:mt-0 lg:col-[4/11]">
-            <ul className="list-none flex flex-wrap gap-x-6 gap-y-2 lg:justify-end">
+          <nav>
+            <ul className="list-none flex flex-wrap gap-x-6 gap-y-2">
               {mainLinks.map((link, i) => (
                 <li key={i} className="shrink-0">
                   <a
@@ -72,24 +73,6 @@ export function Footer({
               ))}
             </ul>
           </nav>
-          <div className="mt-6 lg:mt-0 lg:col-[4/11]">
-            <ul className="list-none flex flex-wrap -my-1 -mx-3 lg:justify-end">
-              {legalLinks.map((link, i) => (
-                <li key={i} className="my-1 mx-3 shrink-0">
-                  <a
-                    href={link.href}
-                    className="text-sm text-muted-foreground underline-offset-4 hover:underline"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="mt-6 text-sm leading-6 text-muted-foreground whitespace-nowrap lg:mt-0 lg:row-[1/3] lg:col-[1/4]">
-            <div>{copyright.text}</div>
-            {copyright.license && <div>{copyright.license}</div>}
-          </div>
         </div>
       </div>
     </footer>

@@ -3,7 +3,7 @@ import { SectionHeading } from '../ui/SectionHeading'
 export function About() {
   return (
     <section id="about" className="py-section-sm md:py-section" aria-labelledby="about-heading">
-      <div className="mx-auto w-full max-w-6xl px-6 sm:px-8">
+      <div className="container-content">
         <SectionHeading id="about-heading">
           About me
         </SectionHeading>

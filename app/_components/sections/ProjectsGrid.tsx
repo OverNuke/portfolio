@@ -56,9 +56,10 @@ export function ProjectsGrid() {
     <>
       <section
         id="projects"
-        className="relative max-w-[1280px] mx-auto px-8 pt-24 pb-40"
+        className="relative pt-24 pb-40"
         aria-labelledby="projects-heading"
       >
+        <div className="container-content relative">
         {/* ── Section head row ──────────────────────── */}
         <div className="relative flex flex-wrap justify-between items-end gap-8 border-b border-dashed border-border pb-7 mb-16">
           <div>
@@ -327,6 +328,7 @@ export function ProjectsGrid() {
               </div>
             );
           })}
+        </div>
         </div>
       </section>
 

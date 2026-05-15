@@ -18,12 +18,12 @@ const TECH_LOGOS = [
 export function Skills() {
   return (
     <section id="skills" className="py-section-sm md:py-section" aria-labelledby="skills-heading">
-      <div className="mx-auto w-full max-w-6xl px-6 sm:px-8">
+      <div className="container-content flex flex-col gap-content">
         <SectionHeading id="skills-heading">
           Skills
         </SectionHeading>
         <div
-          className="flex items-center overflow-hidden h-[72px]"
+          className="flex items-center overflow-hidden h-72px"
           role="region"
           aria-label="Technology logos"
         >

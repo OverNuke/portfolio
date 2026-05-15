@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { RetroContinue } from "@/components/ui/retro-buttons/continue-button";
-import { RetroEnter } from "@/components/ui/retro-buttons/enter";
+import { RetroPressStart } from "@/components/ui/retro-buttons/press-start";
+import { RetroLaunch } from "@/components/ui/retro-buttons/launch";
 import { LayeredText } from "../ui/LayeredText";
 
 const NAME_LINES = [
@@ -40,7 +40,7 @@ export function Hero() {
 
   return (
     <section
-      className="relative isolate min-h-screen overflow-hidden flex flex-col justify-center pt-16"
+      className="relative isolate min-h-screen overflow-hidden flex flex-col justify-center pt-navbar-offset"
       aria-labelledby="hero-heading"
     >
       {/* Visually hidden h1 preserves heading hierarchy for screen readers / SEO */}
@@ -48,7 +48,7 @@ export function Hero() {
         Kevin Sebastián Frías García
       </h1>
 
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 pt-0 pb-16 w-full">
+      <div className="container-content pt-0 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-y-12 lg:gap-y-0 lg:gap-x-16 items-start">
           {/* LEFT — animated name */}
           <LayeredText
@@ -60,9 +60,9 @@ export function Hero() {
           />
 
           {/* RIGHT — role, paragraph, buttons */}
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-content">
             {/* Role label */}
-            <div className="mb-1 lg:mb-9 lg:pl-6">
+            <div className="lg:pl-6">
               <div className="flex items-center gap-3 mb-3" aria-hidden="true">
                 <motion.div
                   className="w-6 h-px bg-foreground/40 origin-left"
@@ -79,11 +79,10 @@ export function Hero() {
                   An alien among humans beings who codes.
                 </motion.span>
               </div>
-              <br />
             </div>
 
             {/* Paragraph — clip-path reveal, no word-by-word */}
-            <div className="overflow-hidden mb-8 lg:mb-10">
+            <div className="overflow-hidden">
               <motion.p
                 className="text-muted leading-relaxed text-[clamp(1rem,1vw+0.65rem,1.2rem)] max-w-2xl"
                 initial={
@@ -97,53 +96,35 @@ export function Hero() {
                 {PARAGRAPH}
               </motion.p>
             </div>
-            <br />
 
-            {/* Buttons — two rows, second row offset for asymmetric composition */}
-            <div className="flex flex-col gap-3">
-              <div className="flex flex-wrap gap-3">
-                {SCROLL_TARGETS.slice(0, 2).map((t, i) => (
-                  <motion.div
-                    key={t.id}
-                    initial={prefersReducedMotion ? false : { opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.12, delay: 0.55 + i * 0.07 }}
-                  >
-                    <RetroEnter
-                      label={t.label}
-                      aria-label={t.aria}
-                      onClick={() =>
-                        document
-                          .getElementById(t.id)
-                          ?.scrollIntoView({ behavior: "smooth" })
-                      }
-                      minWidth={200}
-                    />
-                  </motion.div>
-                ))}
-              </div>
-              <div className="flex flex-wrap gap-3 ml-8 sm:ml-12">
-                {SCROLL_TARGETS.slice(2).map((t, i) => (
-                  <motion.div
-                    key={t.id}
-                    initial={prefersReducedMotion ? false : { opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.12, delay: 0.69 + i * 0.07 }}
-                  >
-                    <RetroContinue
-                      label={t.label}
-                      aria-label={t.aria}
-                      onClick={() =>
-                        document
-                          .getElementById(t.id)
-                          ?.scrollIntoView({ behavior: "smooth" })
-                      }
-                      indexFrom="00"
-                      indexTo="10"
-                    />
-                  </motion.div>
-                ))}
-              </div>
+            {/* Buttons — retro game start menu */}
+            <div className="flex flex-col gap-2">
+              <motion.div
+                initial={prefersReducedMotion ? false : { opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.12, delay: 0.55 }}
+                aria-hidden="true"
+              >
+                <RetroPressStart tabIndex={-1} className="pointer-events-none" />
+              </motion.div>
+              {SCROLL_TARGETS.map((t, i) => (
+                <motion.div
+                  key={t.id}
+                  initial={prefersReducedMotion ? false : { opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.12, delay: 0.65 + i * 0.07 }}
+                >
+                  <RetroLaunch
+                    label={t.label}
+                    aria-label={t.aria}
+                    onClick={() =>
+                      document
+                        .getElementById(t.id)
+                        ?.scrollIntoView({ behavior: "smooth" })
+                    }
+                  />
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>

@@ -17,7 +17,6 @@ Before finalizing any implementation:
 8. Review TypeScript safety
 9. Detect anti-patterns
 10. Remove dead code
-<!-- END:nextjs-agent-rules -->
 
 ## Component Directory Conventions
 
@@ -42,3 +41,5 @@ plausibly be) reused across pages, it belongs in `/components/`.
 
 No barrel (`index.ts`) re-export files under `/components/` — import each
 component directly from its source file.
+
+<!-- END:nextjs-agent-rules -->
