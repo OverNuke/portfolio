@@ -40,7 +40,7 @@ export function Hero() {
 
   return (
     <section
-      className="relative isolate min-h-screen overflow-hidden flex flex-col justify-center pt-navbar-offset"
+      className="relative isolate min-h-screen overflow-hidden flex flex-col justify-center pt-navbar-offset py-section-sm md:py-section"
       aria-labelledby="hero-heading"
     >
       {/* Visually hidden h1 preserves heading hierarchy for screen readers / SEO */}
@@ -48,7 +48,7 @@ export function Hero() {
         Kevin Sebastián Frías García
       </h1>
 
-      <div className="container-content pt-0 pb-16">
+      <div className="container-content">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-12 lg:gap-y-0 lg:gap-x-16 items-start">
           {/* LEFT — animated name */}
           <LayeredText

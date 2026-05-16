@@ -31,13 +31,13 @@
    *  section:     8rem  (= py-32) desktop vertical padding
    *  section-sm:  5rem  (= py-20) mobile vertical padding
    *  heading:     4rem  (= mb-16) below section headings
-   *  content:   1.5rem  (= mb-6)  between content blocks
+   *  content:   2.5rem  (= mb-10) between content blocks
    *  gutter:    1.5rem  (= px-6)  horizontal section padding
    */
   --spacing-section: 8rem;
   --spacing-section-sm: 5rem;
   --spacing-heading: 4rem;
-  --spacing-content: 1.5rem;
+  --spacing-content: 2.5rem;
   --spacing-gutter: 1.5rem;
   /* Navbar offset — pushes Hero content below fixed top navigation */
   --spacing-navbar-offset: 4rem;
@@ -141,10 +141,10 @@ body {
   width: 100%;
   max-width: var(--container-content);
   margin-inline: auto;
-  /* Fluid horizontal padding: 1.25rem on mobile, scaling up to 4rem on
+  /* Fluid horizontal padding: 1.5rem on mobile, scaling up to 6rem on
    * ultrawide displays so the layout breathes instead of hugging a
    * narrow column in the middle of the viewport. */
-  padding-inline: clamp(1.25rem, 4vw, 4rem);
+  padding-inline: clamp(1.5rem, 6vw, 6rem);
 
   @media (min-width: 80rem) {
     max-width: var(--container-content-xl);
