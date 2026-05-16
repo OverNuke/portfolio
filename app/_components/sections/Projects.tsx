@@ -23,7 +23,7 @@ export function Projects() {
     <section
       id="projects"
       aria-labelledby="projects-heading"
-      className="relative container-content py-24 pb-36"
+      className="relative container-content py-section-sm md:py-section"
     >
       <ProjectsHeader
         sectionIndex="SECTION · 003"
