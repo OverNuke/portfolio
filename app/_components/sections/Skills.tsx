@@ -17,11 +17,9 @@ const TECH_LOGOS = [
 
 export function Skills() {
   return (
-    <section id="skills" className="py-section-sm md:py-section" aria-labelledby="skills-heading">
+    <section id="skills" aria-labelledby="skills-heading">
       <div className="flex flex-col gap-content">
-        <SectionHeading id="skills-heading">
-          Skills
-        </SectionHeading>
+        <SectionHeading id="skills-heading">Skills</SectionHeading>
         {/* Full-bleed wrapper: rompe el container-content y contiene el overflow horizontal
             del LogoLoop sin recortar el scaleOnHover (overflow-y queda visible). */}
         <div className="-mx-[calc(50vw-50%)] w-screen overflow-x-clip">

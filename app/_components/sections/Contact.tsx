@@ -13,14 +13,12 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="py-section-sm md:py-section"
       aria-labelledby="contact-heading"
     >
       <div className="flex flex-col gap-content">
         <SectionHeading id="contact-heading">Contact</SectionHeading>
         <p className="text-muted leading-relaxed text-[clamp(0.95rem,0.5vw+0.85rem,1.05rem)]">
-          Have a project in mind or just want to say hi? My inbox is always
-          open.
+          Reach me out any way you prefer! Whether you want to discuss a project, ask a question, or just say hi, I&aposm always open to connecting.
         </p>
         <div>
           <div className="flex flex-wrap justify-center gap-10 md:gap-12">

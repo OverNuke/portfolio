@@ -75,7 +75,7 @@ export function Hero() {
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.15, delay: 0.2 }}
                 >
-                  An alien among humans beings who codes.
+                  An alien among humans beings who codes
                 </motion.span>
               </div>
             </div>

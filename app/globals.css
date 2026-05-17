@@ -48,9 +48,9 @@
    *   xl       ≥ 1280px viewport → 88rem
    *   2xl      ≥ 1536px viewport → 96rem
    * Per-element prose caps (max-w-2xl etc.) still govern line length. */
-  --container-content: 72rem;
-  --container-content-xl: 80rem;
-  --container-content-2xl: 86rem;
+  --container-content: 90rem;
+  --container-content-xl: 90rem;
+  --container-content-2xl: 100rem;
   /* Legacy alias kept for any external references */
   --container-6xl: var(--container-content);
 }
