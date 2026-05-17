@@ -107,7 +107,7 @@ export function LayeredText({
       ref={containerRef}
       onMouseEnter={animate ? handleMouseEnter : undefined}
       onMouseLeave={animate ? handleMouseLeave : undefined}
-      className={`w-fit font-sans font-black tracking-[-1px] uppercase antialiased${animate ? " cursor-pointer" : ""} text-foreground ${className}`}
+      className={`w-max justify-self-center font-sans font-black tracking-[-1px] uppercase antialiased${animate ? " cursor-pointer" : ""} text-foreground ${className}`}
       style={
         {
           fontSize,
@@ -116,7 +116,7 @@ export function LayeredText({
       }
     >
       <ul
-        className="list-none flex flex-col items-center"
+        className="list-none flex flex-col items-center "
         style={{ gap: lineGap > 0 ? `${lineGap}px` : undefined }}
       >
         {rows.map((row, index) => (

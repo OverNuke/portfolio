@@ -23,14 +23,9 @@ export function Projects() {
     <section
       id="projects"
       aria-labelledby="projects-heading"
-      className="relative container-content py-section-sm md:py-section"
+      className="relative py-section-sm md:py-section"
     >
-      <ProjectsHeader
-        sectionIndex="SECTION · 003"
-        shown={shown}
-        featured={1}
-        updated="2025"
-      />
+      <ProjectsHeader />
 
       <ProjectsMarquee items={marqueeItems} />
 
@@ -46,15 +41,12 @@ export function Projects() {
         <span>{String(tiles.length).padStart(2, "0")} entries</span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {tiles.map((project, i) => (
           <ProjectTile key={project.title} project={project} index={i + 2} />
         ))}
       </div>
-
       <ProjectsArchiveLink
-        total={PROJECTS.length}
-        shown={shown}
         href={archiveHref}
       />
     </section>

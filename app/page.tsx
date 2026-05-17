@@ -13,13 +13,15 @@ const Skills = dynamic(() =>
 );
 export default function Home() {
   return (
-    <main id="main-content" className="flex flex-col">
-      <Hero />
-      <About />
-      <Projects />
-      <Certificates />
-      <Skills />
-      <Contact />
+    <main id="main-content">
+      <div className="container-content flex flex-col gap-y-content md:gap-y-heading">
+        <Hero />
+        <About />
+        <Projects />
+        <Certificates />
+        <Skills />
+        <Contact />
+      </div>
     </main>
   )
 }

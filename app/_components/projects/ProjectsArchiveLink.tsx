@@ -1,26 +1,16 @@
 import { ArrowRightIcon } from "./icons";
 
 interface ProjectsArchiveLinkProps {
-  total: number;
-  shown: number;
   href: string;
   label?: string;
 }
 
 export function ProjectsArchiveLink({
-  total,
-  shown,
   href,
   label = "See full archive",
 }: ProjectsArchiveLinkProps) {
   return (
-    <div className="mt-14 flex justify-between items-center gap-4 pt-6 border-t border-edge font-mono text-[10px] uppercase tracking-[0.26em] text-muted">
-      <span>
-        End of selection ·{" "}
-        <b className="text-foreground font-medium tracking-[0.26em]">
-          {String(shown).padStart(2, "0")} / {String(total).padStart(2, "0")}
-        </b>
-      </span>
+    <div className="mt-14 flex justify-between items-center gap-4 pt-6 border-b border-edge font-mono text-[10px] uppercase tracking-[0.26em] text-muted">
       <a
         href={href}
         target="_blank"

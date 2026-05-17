@@ -22,5 +22,6 @@ export function Footer() {
         text: `© ${new Date().getFullYear()} Kevin S. Frías García`,
       }}
     />
+    
   );
 }

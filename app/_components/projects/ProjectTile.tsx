@@ -22,7 +22,7 @@ export function ProjectTile({ project, index }: ProjectTileProps) {
     >
       <ProjectThumbnail category={category} variant="tile" />
 
-      <div className="flex-1 flex flex-col gap-3.5 p-5">
+      <div className="flex-1 flex flex-col gap-4 p-7 sm:p-8 lg:p-9">
         <div className="flex justify-between items-baseline gap-2.5">
           <span className="font-mono text-[10px] uppercase tracking-[0.26em] text-muted">
             {`// ${String(index).padStart(3, "0")}${yearSuffix}`}
@@ -32,7 +32,7 @@ export function ProjectTile({ project, index }: ProjectTileProps) {
           </StatusPill>
         </div>
 
-        <h3 className="font-sans font-bold uppercase text-[22px] leading-tight tracking-[-0.01em]">
+        <h3 className="font-sans font-bold uppercase text-[clamp(18px,2.2vw,24px)] leading-tight tracking-[-0.01em]">
           {project.title}
         </h3>
 

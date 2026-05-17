@@ -11,7 +11,7 @@ interface ProjectsMarqueeProps {
 export function ProjectsMarquee({ items }: ProjectsMarqueeProps) {
   return (
     <div
-      className={`${styles.marqueeStrip} border-y border-edge py-3.5 mb-14`}
+      className={`${styles.marqueeStrip} border-y border-edge py-3.5 mt-6 mb-14`}
       aria-hidden="true"
     >
       <div className={styles.marqueeTrack}>

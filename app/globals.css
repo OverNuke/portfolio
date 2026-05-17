@@ -38,7 +38,7 @@
   --spacing-section-sm: 5rem;
   --spacing-heading: 4rem;
   --spacing-content: 2.5rem;
-  --spacing-gutter: 1.5rem;
+  --spacing-gutter: 2rem;
   /* Navbar offset — pushes Hero content below fixed top navigation */
   --spacing-navbar-offset: 4rem;
   /* Shared content container width — single source of truth for all
@@ -48,19 +48,21 @@
    *   xl       ≥ 1280px viewport → 88rem
    *   2xl      ≥ 1536px viewport → 96rem
    * Per-element prose caps (max-w-2xl etc.) still govern line length. */
-  --container-content: 80rem;
-  --container-content-xl: 88rem;
-  --container-content-2xl: 96rem;
+  --container-content: 72rem;
+  --container-content-xl: 80rem;
+  --container-content-2xl: 86rem;
   /* Legacy alias kept for any external references */
   --container-6xl: var(--container-content);
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 html {
@@ -144,7 +146,7 @@ body {
   /* Fluid horizontal padding: 1.5rem on mobile, scaling up to 6rem on
    * ultrawide displays so the layout breathes instead of hugging a
    * narrow column in the middle of the viewport. */
-  padding-inline: clamp(1.5rem, 6vw, 6rem);
+  padding-inline: clamp(2rem, 7vw, 7rem);
 
   @media (min-width: 80rem) {
     max-width: var(--container-content-xl);

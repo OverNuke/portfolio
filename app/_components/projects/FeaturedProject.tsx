@@ -18,13 +18,13 @@ export function FeaturedProject({ project, index = 1 }: FeaturedProjectProps) {
 
   return (
     <article
-      className={`${styles.thumbHost} relative grid md:grid-cols-[1.15fr_0.85fr] border border-edge bg-canvas mb-16 transition-colors duration-300 hover:border-foreground focus-within:border-foreground`}
+      className={`${styles.thumbHost} relative grid md:grid-cols-[1.15fr_0.85fr] border border-edge bg-canvas mb-20 transition-colors duration-300 hover:border-foreground focus-within:border-foreground`}
     >
       <div className="border-b md:border-b-0 md:border-r border-edge">
         <ProjectThumbnail category={category} variant="featured" />
       </div>
 
-      <div className="relative flex flex-col gap-6 p-9 md:p-12">
+      <div className="relative flex flex-col gap-8 p-9 md:p-12">
         <span
           aria-hidden="true"
           className="absolute top-7 right-7 size-3.5 border-t border-r border-foreground"

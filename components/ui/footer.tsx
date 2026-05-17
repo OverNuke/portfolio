@@ -1,6 +1,7 @@
 import type React from "react";
 import Link from "next/link";
 import { RetroPlayTile } from "./retro-buttons/play-tile";
+import { CertificationsFooter } from "@/app/_components/ui/certifications/CertificationsFooter";
 
 interface FooterProps {
   logo: React.ReactNode;
@@ -73,6 +74,9 @@ export function Footer({
               ))}
             </ul>
           </nav>
+        </div>
+        <div className="mt-10">
+          <CertificationsFooter />
         </div>
       </div>
     </footer>

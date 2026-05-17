@@ -11,16 +11,18 @@ const ICON_PROPS = { size: 18, strokeWidth: 1.5 } as const;
 
 export function Contact() {
   return (
-    <section id="contact" className="py-section-sm md:py-section" aria-labelledby="contact-heading">
-      <div className="container-content flex flex-col gap-content">
-        <SectionHeading id="contact-heading">
-          Contact
-        </SectionHeading>
+    <section
+      id="contact"
+      className="py-section-sm md:py-section"
+      aria-labelledby="contact-heading"
+    >
+      <div className="flex flex-col gap-content">
+        <SectionHeading id="contact-heading">Contact</SectionHeading>
         <p className="text-muted leading-relaxed text-[clamp(0.95rem,0.5vw+0.85rem,1.05rem)]">
           Have a project in mind or just want to say hi? My inbox is always
           open.
         </p>
-        <div className="py-16 md:py-20">
+        <div>
           <div className="flex flex-wrap justify-center gap-10 md:gap-12">
             <RetroControlCell
               label="EMAIL"
@@ -33,13 +35,25 @@ export function Contact() {
               icon={<Link {...ICON_PROPS} />}
               hoverIcon={<User {...ICON_PROPS} />}
               aria-label="Visit my LinkedIn profile"
-              onClick={() => window.open("https://www.linkedin.com/in/keffwontwakeup/", "_blank", "noopener noreferrer")}
+              onClick={() =>
+                window.open(
+                  "https://www.linkedin.com/in/keffwontwakeup/",
+                  "_blank",
+                  "noopener noreferrer",
+                )
+              }
             />
             <RetroIconStack
               label="GITHUB"
               icon={<Code2 {...ICON_PROPS} />}
               aria-label="Visit my GitHub profile"
-              onClick={() => window.open("https://github.com/OverNuke", "_blank", "noopener noreferrer")}
+              onClick={() =>
+                window.open(
+                  "https://github.com/OverNuke",
+                  "_blank",
+                  "noopener noreferrer",
+                )
+              }
             />
             <RetroDownload
               label="DOWNLOAD CV"
@@ -55,7 +69,6 @@ export function Contact() {
           </div>
         </div>
       </div>
-      <br />
     </section>
   );
 }

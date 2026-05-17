@@ -48,8 +48,7 @@ export function Hero() {
         Kevin Sebastián Frías García
       </h1>
 
-      <div className="container-content">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-12 lg:gap-y-0 lg:gap-x-16 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-12 lg:gap-y-0 lg:gap-x-16 items-center">
           {/* LEFT — animated name */}
           <LayeredText
             lines={NAME_LINES}
@@ -128,7 +127,6 @@ export function Hero() {
             </div>
           </div>
         </div>
-      </div>
     </section>
   );
 }
