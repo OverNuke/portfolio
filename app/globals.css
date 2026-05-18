@@ -26,6 +26,8 @@
   --color-foreground: #e4e4e4; /* Silver Mist   — primary text       */
   --color-muted: #888888; /* secondary text 5.3:1 on canvas     */
   --color-edge: #1d2645; /* subtle borders, blue-tinted        */
+  --color-gold: #C8B27A;   /* trait bar accent — hover peak      */
+  --color-gold-2: #e6d4a0; /* lighter gold for fine details      */
 
   /* Spacing scale — section layout tokens
    *  section:     8rem  (= py-32) desktop vertical padding

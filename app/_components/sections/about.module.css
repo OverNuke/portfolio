@@ -1,0 +1,483 @@
+/* About — Player Card styles
+ * Colors map 1:1 to globals.css tokens: --color-canvas, --color-surface,
+ * --color-accent, --color-foreground, --color-muted, --color-edge, --color-gold
+ */
+
+/* ── Card layout ──────────────────────────────────────────────────────── */
+.card {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 0;
+  border: 1px solid var(--color-edge);
+  background: var(--color-surface);
+}
+
+@media (max-width: 61.25rem) {
+  .card {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Panes ────────────────────────────────────────────────────────────── */
+.paneL {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border-right: 1px solid var(--color-edge);
+}
+
+@media (max-width: 61.25rem) {
+  .paneL {
+    border-right: none;
+    border-bottom: 1px solid var(--color-edge);
+  }
+}
+
+.paneR {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+/* ── ID row ───────────────────────────────────────────────────────────── */
+.idRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.idRow b {
+  font-weight: 600;
+  color: var(--color-foreground);
+}
+
+/* ── Name ─────────────────────────────────────────────────────────────── */
+.name {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--color-foreground);
+  margin: 0;
+}
+
+.accent {
+  color: var(--color-muted);
+}
+
+/* ── Role ─────────────────────────────────────────────────────────────── */
+.role {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.role em {
+  font-style: normal;
+  color: var(--color-foreground);
+  opacity: 0.6;
+}
+
+/* ── Bio text ─────────────────────────────────────────────────────────── */
+.lede {
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  line-height: 1.6;
+  color: var(--color-foreground);
+  font-weight: 300;
+}
+
+.bodyText {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+/* ── CTA row ──────────────────────────────────────────────────────────── */
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+
+/* rb01 equivalent — primary link */
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-accent);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1.375rem 1.75rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: transform 160ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  position: relative;
+}
+
+.ctaPrimary:hover {
+  letter-spacing: 0.42em;
+}
+
+.ctaPrimary:active {
+  transform: translateY(1px);
+}
+
+.ctaPrimary:focus-visible {
+  outline: 2px solid var(--color-foreground);
+  outline-offset: 6px;
+}
+
+.caret {
+  display: inline-block;
+  width: 0.55ch;
+  margin-left: 0.55ch;
+  background: #fff;
+  height: 1em;
+  transform: translateY(0.12em);
+  animation: caretBlink 1.2s steps(1) infinite;
+}
+
+@keyframes caretBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* rb04 equivalent — secondary link */
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.375rem;
+  background: var(--color-accent);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1.375rem 2rem 1.375rem 1.375rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: transform 160ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.ctaSecondary:active {
+  transform: translateY(1px);
+}
+
+.ctaSecondary:focus-visible {
+  outline: 2px solid var(--color-foreground);
+  outline-offset: 6px;
+}
+
+.index {
+  display: inline-block;
+  width: 1.2ch;
+  height: 1em;
+  overflow: hidden;
+  position: relative;
+  border-left: 1px solid rgba(255, 255, 255, 0.35);
+  padding-left: 0.875rem;
+  box-sizing: content-box;
+}
+
+.indexRoll {
+  display: block;
+  transform: translateY(0);
+  transition: transform 240ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.indexRoll span {
+  display: block;
+  height: 1em;
+  line-height: 1em;
+}
+
+.ctaSecondary:hover .indexRoll {
+  transform: translateY(-1em);
+}
+
+/* ── Stat block (avatar + level row) ─────────────────────────────────── */
+.statBlock {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+/* ── Avatar frame ─────────────────────────────────────────────────────── */
+.avFrame {
+  position: relative;
+  flex-shrink: 0;
+  width: 160px;
+  height: 160px;
+  border: 1px solid var(--color-edge);
+  background: var(--color-accent);
+  overflow: hidden;
+}
+
+.avImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.avImgOver {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .avImgOver {
+    transition: opacity 240ms ease;
+  }
+}
+
+.avFrame:hover .avImgOver {
+  opacity: 1;
+}
+
+.avTag {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(11, 11, 11, 0.72);
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.22em;
+  text-align: center;
+  color: var(--color-muted);
+  padding: 3px 0;
+}
+
+/* Corner brackets */
+.corners {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.corners span {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: rgba(255, 255, 255, 0.5);
+  border-style: solid;
+}
+
+.corners span:nth-child(1) { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+.corners span:nth-child(2) { top: -1px; right: -1px; border-width: 1px 1px 0 0; }
+.corners span:nth-child(3) { bottom: -1px; left: -1px; border-width: 0 0 1px 1px; }
+.corners span:nth-child(4) { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+
+/* ── Level row ────────────────────────────────────────────────────────── */
+.lvRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.statRow {
+  display: flex;
+  gap: 1rem;
+}
+
+.statRow div {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.statRow dt {
+  font-size: 0.5625rem;
+  color: var(--color-muted);
+  letter-spacing: 0.14em;
+}
+
+.statRow dd {
+  font-weight: 600;
+  color: var(--color-foreground);
+  font-size: 0.6875rem;
+}
+
+/* ── Status pulse ─────────────────────────────────────────────────────── */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.22em;
+  color: var(--color-muted);
+}
+
+.status::before {
+  content: "";
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  background: var(--color-muted);
+  border-radius: 50%;
+  animation: statusPulse 1.8s ease-in-out infinite;
+}
+
+.statusLive::before {
+  background: var(--color-gold);
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+/* ── Trait gauges ─────────────────────────────────────────────────────── */
+.gauges {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  border-top: 1px solid var(--color-edge);
+  padding-top: 1.25rem;
+}
+
+.gauge {
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  align-items: center;
+  gap: 0.875rem;
+  cursor: default;
+}
+
+.gauge:focus-visible {
+  outline: 2px solid var(--color-foreground);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.gaugeLbl {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  white-space: nowrap;
+  min-width: 7rem;
+  transition: color 200ms ease;
+}
+
+.gauge:hover .gaugeLbl {
+  color: var(--color-foreground);
+}
+
+.gaugeBar {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  gap: 3px;
+  height: 8px;
+}
+
+.gaugeBar i {
+  display: block;
+  background: var(--color-accent);
+  transition: background 240ms ease, transform 240ms ease;
+}
+
+.gaugeBar i.off {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.gauge:hover .gaugeBar i:not(.off) {
+  background: var(--color-foreground);
+}
+
+.gauge:hover .gaugeBar i:not(.off):nth-last-child(-n+5) {
+  background: var(--color-gold);
+}
+
+.gaugeVal {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.12em;
+  color: var(--color-muted);
+  transition: color 200ms ease;
+}
+
+.gauge:hover .gaugeVal {
+  color: var(--color-foreground);
+}
+
+/* ── Spec list ────────────────────────────────────────────────────────── */
+.spec {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  border-top: 1px solid var(--color-edge);
+  padding-top: 1.25rem;
+}
+
+.spec div {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+
+.spec dt {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.spec dd {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-foreground);
+  letter-spacing: 0.06em;
+}
+
+/* ── Reduced motion ───────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .caret,
+  .status::before,
+  .statusLive::before {
+    animation: none;
+  }
+
+  .ctaPrimary,
+  .ctaSecondary,
+  .indexRoll,
+  .gaugeBar i,
+  .gaugeLbl,
+  .gaugeVal {
+    transition: none;
+  }
+}

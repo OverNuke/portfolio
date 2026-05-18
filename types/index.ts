@@ -35,3 +35,30 @@ export interface SocialLink {
   href: string
   icon?: string
 }
+
+export interface AboutTrait {
+  label: string
+  value: number
+  max: number
+}
+
+export interface AboutProfile {
+  firstName: string
+  lastName: string
+  role: string
+  roleClass: string
+  level: number
+  exp: { current: number; max: number }
+  slot: number
+  status: string
+  statusOnline: boolean
+  bio: string
+  bodyText: string
+  location: string
+  openTo: string
+  traits: AboutTrait[]
+  avatarSrc: string
+  avatarSrcHover?: string
+  ctaPrimary: { label: string; href: string }
+  ctaSecondary: { label: string; href: string }
+}

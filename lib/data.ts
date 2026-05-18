@@ -1,4 +1,4 @@
-import type { Certificate, Project, Skill, SocialLink } from '@/types'
+import type { AboutProfile, Certificate, Project, Skill, SocialLink } from '@/types'
 
 export const PROJECTS: Project[] = [
   {
@@ -116,3 +116,29 @@ export const SOCIAL_LINKS: SocialLink[] = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/keffwontwakeup/', icon: '/linkedin.svg' },
   { label: 'Email', href: 'mailto:ksfgarcia24@gmail.com', icon: '/gmail.svg' },
 ]
+
+export const ABOUT_PROFILE: AboutProfile = {
+  firstName: 'Kevin S.',
+  lastName: 'F. García',
+  role: 'Jr. Software Developer',
+  roleClass: 'Apprentice class',
+  level: 4,
+  exp: { current: 124, max: 500 },
+  slot: 1,
+  status: 'ONLINE · OPEN TO WORK',
+  statusOnline: true,
+  bio: 'Want to know more about me? I might not be the most experienced nor the flashiest player, but I always give my best and I\'m eager to learn new skills and take on challenges.',
+  bodyText: 'Open to junior roles and internships where I can grow and contribute.',
+  location: 'Mexico',
+  openTo: 'Junior roles · internships',
+  traits: [
+    { label: 'Responsibility', value: 18, max: 20 },
+    { label: 'Compromise',     value: 17, max: 20 },
+    { label: 'Hard Working',   value: 19, max: 20 },
+    { label: 'Curiosity',      value: 16, max: 20 },
+  ],
+  avatarSrc: '/about/ProfileWithoutHood.png',
+  avatarSrcHover: '/about/ProfileWithHood.png',
+  ctaPrimary:   { label: 'PRESS START', href: '#contact' },
+  ctaSecondary: { label: 'CONTINUE',    href: '#projects' },
+}
