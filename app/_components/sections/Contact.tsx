@@ -11,14 +11,13 @@ const ICON_PROPS = { size: 18, strokeWidth: 1.5 } as const;
 
 export function Contact() {
   return (
-    <section
-      id="contact"
-      aria-labelledby="contact-heading"
-    >
+    <section id="contact" aria-labelledby="contact-heading">
       <div className="flex flex-col gap-content">
         <SectionHeading id="contact-heading">Contact</SectionHeading>
         <p className="text-muted leading-relaxed text-[clamp(0.95rem,0.5vw+0.85rem,1.05rem)]">
-          Reach me out any way you prefer! Whether you want to discuss a project, ask a question, or just say hi, I&aposm always open to connecting.
+          Reach me out any way you prefer! Whether you want to discuss a
+          project, ask a question, or just say hi, I&apos;m always open to
+          connecting.
         </p>
         <div>
           <div className="flex flex-wrap justify-center gap-10 md:gap-12">
@@ -59,7 +58,7 @@ export function Contact() {
               aria-label="Download my CV"
               onClick={() => {
                 const a = document.createElement("a");
-                a.href = "/cv.pdf";
+                a.href = "/CV/Kevin_S_Frias_Garcia.pdf";
                 a.download = "Kevin_Garcia_CV.pdf";
                 a.click();
               }}

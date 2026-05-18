@@ -109,7 +109,6 @@ export function CinematicIntro() {
     if (!active) return;
     overlayRef.current?.focus();
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Tab") { e.preventDefault(); return; }
       if (e.key === "Escape" || e.key === "Enter" || e.key === " ") dismiss();
     };
     window.addEventListener("keydown", onKey);

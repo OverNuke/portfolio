@@ -117,7 +117,10 @@ export default function BubbleMenu({
   };
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) handleClose();
+    if (e.target === e.currentTarget) {
+      handleClose();
+      toggleButtonRef.current?.focus();
+    }
   };
 
   useEffect(() => {
