@@ -1,0 +1,145 @@
+.tapeFrame {
+  border: 1px solid var(--color-edge);
+  overflow: hidden;
+  position: relative;
+}
+.tapeFrame::before,
+.tapeFrame::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 3;
+  pointer-events: none;
+}
+.tapeFrame::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-canvas), transparent);
+}
+.tapeFrame::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-canvas), transparent);
+}
+
+.tapeStrip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 1px dashed var(--color-edge);
+}
+
+.tapeStripLive {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.tapeStripLive::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: var(--color-foreground);
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse 1.6s steps(2) infinite;
+}
+
+.tapePrimary {
+  display: flex;
+  align-items: center;
+  padding: 30px 0;
+  white-space: nowrap;
+  animation: tape-scroll 42s linear infinite;
+  will-change: transform;
+}
+.tapePrimary:hover {
+  animation-play-state: paused;
+}
+
+.tapeItem {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 22px;
+  white-space: nowrap;
+}
+.tapeItemCat {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--color-muted);
+  margin-right: 12px;
+  padding-right: 12px;
+  border-right: 1px solid var(--color-edge);
+}
+.tapeSep {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 8px;
+  user-select: none;
+}
+.tapeCursor {
+  display: inline-block;
+  width: 10px;
+  height: 18px;
+  background: var(--color-foreground);
+  margin: 0 22px;
+  vertical-align: middle;
+  animation: rb-blink 1.2s steps(1) infinite;
+}
+
+.tapeAlt {
+  border-top: 1px dashed var(--color-edge);
+  overflow: hidden;
+}
+
+.tapeFoot {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--color-edge);
+}
+.tapeFootCell {
+  padding: 18px 22px;
+  border-right: 1px solid var(--color-edge);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.tapeFootCell:last-child {
+  border-right: 0;
+}
+.tapeFootKey {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--color-muted);
+  text-transform: uppercase;
+}
+.tapeFootValue {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-foreground);
+}
+
+@keyframes tape-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes rb-blink {
+  0%,  49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@keyframes pulse {
+  0%,  49% { opacity: 1; }
+  50%, 100% { opacity: 0.25; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tapePrimary              { animation: none; }
+  .tapeCursor               { animation: none; }
+  .tapeStripLive::before    { animation: none; }
+}
+
+@media (max-width: 640px) {
+  .tapeFrame::before,
+  .tapeFrame::after { width: 40px; }
+}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { AboutTrait } from "@/types";
 import { ABOUT_PROFILE } from "@/lib/data";
+import { RetroContinue } from "@/components/ui/retro-buttons/continue-button";
 import { SectionHeading } from "../ui/SectionHeading";
 import styles from "./about.module.css";
 
@@ -71,19 +72,10 @@ export function About() {
               <span>{p.ctaPrimary.label}</span>
               <span className={styles.caret} aria-hidden="true" />
             </a>
-            <a
+            <RetroContinue
               href={p.ctaSecondary.href}
-              className={styles.ctaSecondary}
-              aria-label={p.ctaSecondary.label}
-            >
-              <span className={styles.index} aria-hidden="true">
-                <span className={styles.indexRoll}>
-                  <span>01</span>
-                  <span>02</span>
-                </span>
-              </span>
-              <span>{p.ctaSecondary.label}</span>
-            </a>
+              label={p.ctaSecondary.label}
+            />
           </div>
         </div>
 
