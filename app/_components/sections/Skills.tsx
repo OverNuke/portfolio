@@ -26,16 +26,16 @@ export function Skills() {
       <div className={styles.tapeFrame}>
         <div className={styles.tapeStrip} aria-hidden="true">
           <span
-            className={`${styles.tapeStripLive} font-mono text-[10px] uppercase tracking-[0.24em] text-var(--color-foreground)`}
+            className={`${styles.tapeStripLive} font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--color-foreground)]`}
           >
             Now Playing
           </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-var(--color-muted)">
+          <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--color-muted)]">
             {TAPE_META.track}
           </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-var(--color-muted)">
+          <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--color-muted)]">
             BPM{" "}
-            <span className="text-var(--color-foreground)">
+            <span className="text-[var(--color-foreground)]">
               {TAPE_META.bpm}
             </span>
           </span>
