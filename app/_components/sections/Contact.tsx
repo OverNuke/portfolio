@@ -11,8 +11,8 @@ const ICON_PROPS = { size: 18, strokeWidth: 1.5 } as const;
 
 export function Contact() {
   return (
-    <section id="contact" aria-labelledby="contact-heading">
-      <div className="flex flex-col gap-content">
+    <section id="contact" aria-labelledby="contact-heading" className="py-section-sm md:py-section">
+      <div className="flex flex-col gap-4 md:gap-content">
         <SectionHeading id="contact-heading">Contact</SectionHeading>
         <p className="text-muted leading-relaxed text-[clamp(0.95rem,0.5vw+0.85rem,1.05rem)]">
           Reach me out any way you prefer! Whether you want to discuss a

@@ -464,6 +464,50 @@
   letter-spacing: 0.06em;
 }
 
+/* ── Mobile layout (≤ 640px) ─────────────────────────────────────────── */
+@media (max-width: 40rem) {
+  .avFrame {
+    width: clamp(80px, 25vw, 120px);
+    height: clamp(80px, 25vw, 120px);
+  }
+
+  .statBlock {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .gaugeLbl {
+    min-width: 5rem;
+  }
+
+  .spec div {
+    grid-template-columns: 3.5rem 1fr;
+  }
+
+  .ctaRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ctaPrimary {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .ctaRow > a {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ── Tablet soft-landing (640px–768px) ───────────────────────────────── */
+@media (min-width: 40rem) and (max-width: 48rem) {
+  .avFrame {
+    width: 130px;
+    height: 130px;
+  }
+}
+
 /* ── Reduced motion ───────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .caret,

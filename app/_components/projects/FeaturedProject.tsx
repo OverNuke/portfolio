@@ -24,7 +24,7 @@ export function FeaturedProject({ project, index = 1 }: FeaturedProjectProps) {
         <ProjectThumbnail category={category} variant="featured" />
       </div>
 
-      <div className="relative flex flex-col gap-8 p-9 md:p-12">
+      <div className="relative flex flex-col gap-8 p-5 md:p-9 lg:p-12">
         <span
           aria-hidden="true"
           className="absolute top-7 right-7 size-3.5 border-t border-r border-foreground"

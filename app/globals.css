@@ -150,6 +150,10 @@ body {
    * narrow column in the middle of the viewport. */
   padding-inline: clamp(2rem, 7vw, 7rem);
 
+  @media (max-width: 40rem) {
+    padding-inline: 0.75rem;
+  }
+
   @media (min-width: 80rem) {
     max-width: var(--container-content-xl);
   }
