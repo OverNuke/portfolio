@@ -88,6 +88,7 @@ export function About() {
                 alt={`${p.firstName} ${p.lastName} profile photo`}
                 width={160}
                 height={160}
+                sizes="(max-width: 640px) 25vw, 160px"
                 className={styles.avImg}
                 priority
               />
@@ -98,6 +99,7 @@ export function About() {
                   aria-hidden
                   width={160}
                   height={160}
+                  sizes="(max-width: 640px) 25vw, 160px"
                   className={styles.avImgOver}
                 />
               )}

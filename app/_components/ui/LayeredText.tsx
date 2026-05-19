@@ -61,6 +61,7 @@ export function LayeredText({
 
     const ctx = gsap.context(() => {
       const isMd = window.matchMedia("(min-width: 768px)").matches;
+      if (!isMd) return;
       const travel = isMd ? lineHeight : lineHeightMd;
 
       timelineRef.current = gsap.timeline({ paused: true });

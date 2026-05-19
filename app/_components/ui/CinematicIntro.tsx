@@ -74,7 +74,10 @@ export function CinematicIntro() {
     try {
       played = sessionStorage.getItem(STORAGE_KEY) === "1";
     } catch {}
-    if (played || prefersReducedMotion) {
+    if (played || prefersReducedMotion || window.innerWidth < 640) {
+      if (window.innerWidth < 640) {
+        try { sessionStorage.setItem(STORAGE_KEY, "1"); } catch {}
+      }
       setActive(false);
       return;
     }
