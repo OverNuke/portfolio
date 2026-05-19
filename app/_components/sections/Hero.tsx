@@ -56,6 +56,8 @@ export function Hero() {
             animate={true}
             lineGap={10}
             fontSize="clamp(2rem, 6vw, 3.5rem)"
+            lineHeightMd={46}
+            staggerXMd={6}
           />
 
           {/* RIGHT — role, paragraph, buttons */}

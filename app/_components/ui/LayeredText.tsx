@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 import type React from "react";
 
@@ -50,6 +50,15 @@ export function LayeredText({
 }: LayeredTextProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 639px)");
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
 
   useEffect(() => {
     if (!animate) return;
@@ -82,6 +91,9 @@ export function LayeredText({
   const handleMouseEnter = () => timelineRef.current?.play();
   const handleMouseLeave = () => timelineRef.current?.reverse();
 
+  const activeLineHeight = isMobile ? lineHeightMd : lineHeight;
+  const activeStaggerX = isMobile ? staggerXMd : staggerX;
+
   const rows = useMemo(
     () =>
       lines.map((line, index) => {
@@ -91,7 +103,7 @@ export function LayeredText({
           : "skew(0deg, -30deg) scaleY(1.33333)";
         return {
           line,
-          transform: `translateX(${index * staggerX}px) ${skew}`,
+          transform: `translateX(${index * activeStaggerX}px) ${skew}`,
           topColor:
             colorByWord?.[line.top.trim()] ??
             lineColors?.[index % lineColors.length],
@@ -100,7 +112,7 @@ export function LayeredText({
             lineColors?.[index % lineColors.length],
         };
       }),
-    [lines, staggerX, colorByWord, lineColors],
+    [lines, activeStaggerX, colorByWord, lineColors],
   );
 
   return (
@@ -127,7 +139,7 @@ export function LayeredText({
             style={
               {
                 width: "max-content",
-                height: `${lineHeight}px`,
+                height: `${activeLineHeight}px`,
                 transform: row.transform,
                 color: row.topColor,
                 overflow: "clip",
@@ -138,8 +150,8 @@ export function LayeredText({
           >
             <p
               style={{
-                height: `${lineHeight}px`,
-                lineHeight: `${lineHeight}px`,
+                height: `${activeLineHeight}px`,
+                lineHeight: `${activeLineHeight}px`,
                 margin: 0,
               }}
             >
@@ -147,8 +159,8 @@ export function LayeredText({
             </p>
             <p
               style={{
-                height: `${lineHeight}px`,
-                lineHeight: `${lineHeight}px`,
+                height: `${activeLineHeight}px`,
+                lineHeight: `${activeLineHeight}px`,
                 margin: 0,
               }}
             >
